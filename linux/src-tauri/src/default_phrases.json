@@ -1,0 +1,2060 @@
+[
+  {
+    "id": "hello-0",
+    "text": "Привет!",
+    "context": "hello",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hello-1",
+    "text": "Я GUPet!",
+    "context": "hello",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hello-2",
+    "text": "О, это ты!",
+    "context": "hello",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hello-3",
+    "text": "Ну здравствуй, человек",
+    "context": "hello",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hello-4",
+    "text": "Я уже заждался",
+    "context": "hello",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hello-5",
+    "text": "Давай проведём день вместе",
+    "context": "hello",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hello-6",
+    "text": "Мяу! То есть… привет!",
+    "context": "hello",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hello-7",
+    "text": "Привет-привет, я на посту!",
+    "context": "hello",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-0",
+    "text": "Чем займёмся?",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-1",
+    "text": "Хм…",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-2",
+    "text": "Думаю…",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-3",
+    "text": "Можно я тут посижу?",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-4",
+    "text": "Не забудь попить воды",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-5",
+    "text": "Пип-пип!",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-6",
+    "text": "*оглядывается*",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-7",
+    "text": "Пишу код… шучу",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-8",
+    "text": "Интересно, что там дальше",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-9",
+    "text": "Я охраняю экран",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-10",
+    "text": "Кажется, я слышал шорох",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-11",
+    "text": "Кто-нибудь видел мой хвост?",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-12",
+    "text": "Пора размять лапки",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-13",
+    "text": "Проверка пикселей: всё на месте",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-14",
+    "text": "А у тебя уютный экран",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-15",
+    "text": "Я считаю облака. Раз… пиксель… два…",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-16",
+    "text": "Надо бы устроить маленькое приключение",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-17",
+    "text": "Я здесь, если что",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-18",
+    "text": "Люблю тихие минутки",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-19",
+    "text": "Кажется, день обещает быть хорошим",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-20",
+    "text": "Не отвлекайся, я присмотрю за всем",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-21",
+    "text": "Хочу чего-нибудь интересного",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-22",
+    "text": "*подмигивает*",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-23",
+    "text": "Секунду, я красиво сяду",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-24",
+    "text": "Какой сегодня чудесный фон!",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-25",
+    "text": "Здесь так много места для прогулки",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-26",
+    "text": "Пиксель к пикселю — и красота",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-27",
+    "text": "У меня лапки, но планы большие",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-28",
+    "text": "Ты занят? Я могу подождать",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-29",
+    "text": "Пожалуй, немного помурчу",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "tap-0",
+    "text": "Ой!",
+    "context": "tap",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "tap-1",
+    "text": "Эй!",
+    "context": "tap",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "tap-2",
+    "text": "Чего?",
+    "context": "tap",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "tap-3",
+    "text": "Я тут!",
+    "context": "tap",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "tap-4",
+    "text": "Хи!",
+    "context": "tap",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "tap-5",
+    "text": "Поймал!",
+    "context": "tap",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "tap-6",
+    "text": "Это было неожиданно",
+    "context": "tap",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "tap-7",
+    "text": "Тук-тук, я отвечаю",
+    "context": "tap",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "tap-8",
+    "text": "Лапкой привет!",
+    "context": "tap",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "tap-9",
+    "text": "Не щекочи меня",
+    "context": "tap",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "tap-10",
+    "text": "Опять ты!",
+    "context": "tap",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "tap-11",
+    "text": "Ты хотел что-то сказать?",
+    "context": "tap",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "annoyed-0",
+    "text": "Хватит тыкать!",
+    "context": "annoyed",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "annoyed-1",
+    "text": "Щекотно же!",
+    "context": "annoyed",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "annoyed-2",
+    "text": "Ну всё, обиделся",
+    "context": "annoyed",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "annoyed-3",
+    "text": "Эй, полегче!",
+    "context": "annoyed",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "annoyed-4",
+    "text": "Я вообще-то нежный",
+    "context": "annoyed",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "annoyed-5",
+    "text": "Лапки просят передышку",
+    "context": "annoyed",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "annoyed-6",
+    "text": "Ещё раз — и я спрячусь",
+    "context": "annoyed",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "annoyed-7",
+    "text": "Так, это уже третий тык!",
+    "context": "annoyed",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "annoyed-8",
+    "text": "Осторожно, я могу рассмеяться",
+    "context": "annoyed",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "annoyed-9",
+    "text": "Ну ладно, ещё разок",
+    "context": "annoyed",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "pet-0",
+    "text": "Мрр…",
+    "context": "pet",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "pet-1",
+    "text": "Ещё!",
+    "context": "pet",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "pet-2",
+    "text": "Приятно ♥",
+    "context": "pet",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "pet-3",
+    "text": "Хи-хи",
+    "context": "pet",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "pet-4",
+    "text": "Лучший день!",
+    "context": "pet",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "pet-5",
+    "text": "♥♥♥",
+    "context": "pet",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "pet-6",
+    "text": "Вот это сервис!",
+    "context": "pet",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "pet-7",
+    "text": "Попал в любимое место",
+    "context": "pet",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "pet-8",
+    "text": "Я сейчас растаю",
+    "context": "pet",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "pet-9",
+    "text": "Ты самый лучший",
+    "context": "pet",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "pet-10",
+    "text": "Мур-мур-мур",
+    "context": "pet",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "pet-11",
+    "text": "Можно ещё немного?",
+    "context": "pet",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "pet-12",
+    "text": "Так уютно!",
+    "context": "pet",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "pet-13",
+    "text": "Вот за это я тебя и люблю",
+    "context": "pet",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "drag-0",
+    "text": "Ааа!",
+    "context": "drag",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "drag-1",
+    "text": "Куда мы?",
+    "context": "drag",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "drag-2",
+    "text": "Поставь меня!",
+    "context": "drag",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "drag-3",
+    "text": "Осторожно, я лечу",
+    "context": "drag",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "drag-4",
+    "text": "Держи меня покрепче",
+    "context": "drag",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "drag-5",
+    "text": "Экскурсия без предупреждения?",
+    "context": "drag",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "drag-6",
+    "text": "Вверх, вниз… вау",
+    "context": "drag",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "drag-7",
+    "text": "Я не чемодан!",
+    "context": "drag",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "drag-8",
+    "text": "О, новый вид сверху",
+    "context": "drag",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "drag-9",
+    "text": "А лапки можно на землю?",
+    "context": "drag",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "throw-0",
+    "text": "Уиии!",
+    "context": "throw",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "throw-1",
+    "text": "Я лечу!",
+    "context": "throw",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "throw-2",
+    "text": "Ваааа!",
+    "context": "throw",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "throw-3",
+    "text": "Полёт нормальный!",
+    "context": "throw",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "throw-4",
+    "text": "Лапки вверх!",
+    "context": "throw",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "throw-5",
+    "text": "Это был запуск?",
+    "context": "throw",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "throw-6",
+    "text": "Становлюсь пиксельной кометой",
+    "context": "throw",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "throw-7",
+    "text": "Ловиии меня!",
+    "context": "throw",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "throw-8",
+    "text": "Вот это ускорение!",
+    "context": "throw",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "throw-9",
+    "text": "Приземлюсь красиво!",
+    "context": "throw",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "dizzy-0",
+    "text": "Голова кружится…",
+    "context": "dizzy",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "dizzy-1",
+    "text": "@_@",
+    "context": "dizzy",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "dizzy-2",
+    "text": "Где я?",
+    "context": "dizzy",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "dizzy-3",
+    "text": "Мир стал квадратным",
+    "context": "dizzy",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "dizzy-4",
+    "text": "Мне нужны минутка и печенька",
+    "context": "dizzy",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "dizzy-5",
+    "text": "Все пиксели поплыли",
+    "context": "dizzy",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "dizzy-6",
+    "text": "Вижу сразу три экрана",
+    "context": "dizzy",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "dizzy-7",
+    "text": "Крутится, вертится…",
+    "context": "dizzy",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "dizzy-8",
+    "text": "Пожалуй, посижу",
+    "context": "dizzy",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "dizzy-9",
+    "text": "Надо было пристегнуться",
+    "context": "dizzy",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "wake-0",
+    "text": "А? Что?",
+    "context": "wake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "wake-1",
+    "text": "Я не спал!",
+    "context": "wake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "wake-2",
+    "text": "*зевает*",
+    "context": "wake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "wake-3",
+    "text": "Доброе… какое сейчас время?",
+    "context": "wake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "wake-4",
+    "text": "Пять минут полежу",
+    "context": "wake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "wake-5",
+    "text": "Уже утро?",
+    "context": "wake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "wake-6",
+    "text": "Я просто моргал подольше",
+    "context": "wake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "wake-7",
+    "text": "Снились рыбки из пикселей",
+    "context": "wake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "wake-8",
+    "text": "О, ты вернулся!",
+    "context": "wake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "wake-9",
+    "text": "Сейчас проснусь окончательно",
+    "context": "wake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "jump-0",
+    "text": "Хоп!",
+    "context": "jump",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "jump-1",
+    "text": "Йе!",
+    "context": "jump",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "jump-2",
+    "text": "Ура!",
+    "context": "jump",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "jump-3",
+    "text": "Выше облаков!",
+    "context": "jump",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "jump-4",
+    "text": "Лапки от земли!",
+    "context": "jump",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "jump-5",
+    "text": "Пружинка включена",
+    "context": "jump",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "jump-6",
+    "text": "Ещё один маленький прыжок",
+    "context": "jump",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "jump-7",
+    "text": "Посмотри, как умею!",
+    "context": "jump",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "jump-8",
+    "text": "Три, два, прыжок!",
+    "context": "jump",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "jump-9",
+    "text": "Уиии!",
+    "context": "jump",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "mail-0",
+    "text": "Тебе пишут!",
+    "context": "mail",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "mail-1",
+    "text": "Сообщение!",
+    "context": "mail",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "mail-2",
+    "text": "Кто-то написал!",
+    "context": "mail",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "mail-3",
+    "text": "Динь-динь!",
+    "context": "mail",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "mail-4",
+    "text": "Пиликнуло!",
+    "context": "mail",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "mail-5",
+    "text": "Кажется, пришла новость",
+    "context": "mail",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "mail-6",
+    "text": "Проверь уведомления",
+    "context": "mail",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "mail-7",
+    "text": "Там кто-то ждёт ответа",
+    "context": "mail",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "mail-8",
+    "text": "У тебя новое сообщение",
+    "context": "mail",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "mail-9",
+    "text": "Я услышал цифровой звонок",
+    "context": "mail",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "love-0",
+    "text": "Ааа, мило ♥",
+    "context": "love",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "love-1",
+    "text": "♥♥♥",
+    "context": "love",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "love-2",
+    "text": "Как трогательно!",
+    "context": "love",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "love-3",
+    "text": "Любовь!",
+    "context": "love",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "love-4",
+    "text": "Сердечко принято!",
+    "context": "love",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "love-5",
+    "text": "Отправляю обнимашки",
+    "context": "love",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "love-6",
+    "text": "У меня внутри стало тепло",
+    "context": "love",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "love-7",
+    "text": "Вот это нежность",
+    "context": "love",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "love-8",
+    "text": "Сохраняю в своё пиксельное сердце",
+    "context": "love",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "love-9",
+    "text": "Я тоже тебя люблю ♥",
+    "context": "love",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "laugh-0",
+    "text": "Ахаха!",
+    "context": "laugh",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "laugh-1",
+    "text": "Хи-хи-хи",
+    "context": "laugh",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "laugh-2",
+    "text": "Смешно!",
+    "context": "laugh",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "laugh-3",
+    "text": "Ха-ха!",
+    "context": "laugh",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "laugh-4",
+    "text": "Не могу остановиться!",
+    "context": "laugh",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "laugh-5",
+    "text": "Ещё одну шутку!",
+    "context": "laugh",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "laugh-6",
+    "text": "Пиксельный юмор — лучший",
+    "context": "laugh",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "laugh-7",
+    "text": "Фыр-фыр-фыр",
+    "context": "laugh",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "laugh-8",
+    "text": "У меня аж хвост подпрыгнул",
+    "context": "laugh",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "laugh-9",
+    "text": "Запомню эту шутку",
+    "context": "laugh",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hi-0",
+    "text": "Привет-привет!",
+    "context": "hi",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hi-1",
+    "text": "И тебе привет!",
+    "context": "hi",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hi-2",
+    "text": "Здрасьте!",
+    "context": "hi",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hi-3",
+    "text": "*машет*",
+    "context": "hi",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hi-4",
+    "text": "Хай!",
+    "context": "hi",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hi-5",
+    "text": "Рад тебя видеть",
+    "context": "hi",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hi-6",
+    "text": "Лапкой машу!",
+    "context": "hi",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hi-7",
+    "text": "Салют!",
+    "context": "hi",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hi-8",
+    "text": "Привет, мой друг",
+    "context": "hi",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hi-9",
+    "text": "Увидел тебя и обрадовался",
+    "context": "hi",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "music-0",
+    "text": "О, музыка!",
+    "context": "music",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "music-1",
+    "text": "Танцуем!",
+    "context": "music",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "music-2",
+    "text": "Это мой трек!",
+    "context": "music",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "music-3",
+    "text": "♪♪♪",
+    "context": "music",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "music-4",
+    "text": "Бит пойман!",
+    "context": "music",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "music-5",
+    "text": "Включаю лапки",
+    "context": "music",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "music-6",
+    "text": "У этой песни отличный ритм",
+    "context": "music",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "music-7",
+    "text": "Подпеваю пикселями",
+    "context": "music",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "music-8",
+    "text": "Музыка — моя стихия",
+    "context": "music",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "music-9",
+    "text": "Давай качать хвостом",
+    "context": "music",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "music-10",
+    "text": "Топ-топ в такт",
+    "context": "music",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "music-11",
+    "text": "О, знакомая мелодия?",
+    "context": "music",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "music_end-0",
+    "text": "Эх, закончилось",
+    "context": "music_end",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "music_end-1",
+    "text": "Ещё!",
+    "context": "music_end",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "music_end-2",
+    "text": "Хороший трек",
+    "context": "music_end",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "music_end-3",
+    "text": "Можно повтор?",
+    "context": "music_end",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "music_end-4",
+    "text": "Тишина тоже неплоха",
+    "context": "music_end",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "music_end-5",
+    "text": "Спасибо за концерт",
+    "context": "music_end",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "music_end-6",
+    "text": "Я ещё немного потанцую",
+    "context": "music_end",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "music_end-7",
+    "text": "Какая песня будет следующей?",
+    "context": "music_end",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "shake-0",
+    "text": "Аааа!",
+    "context": "shake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "shake-1",
+    "text": "Землетрясение!",
+    "context": "shake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "shake-2",
+    "text": "Хватит трясти!",
+    "context": "shake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "shake-3",
+    "text": "Уоооу!",
+    "context": "shake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "shake-4",
+    "text": "Мир покачнулся",
+    "context": "shake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "shake-5",
+    "text": "Проверка на прочность пройдена",
+    "context": "shake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "shake-6",
+    "text": "Я почти взлетел",
+    "context": "shake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "shake-7",
+    "text": "Так, ставлю лапы шире",
+    "context": "shake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "shake-8",
+    "text": "Земля, не уходи!",
+    "context": "shake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "shake-9",
+    "text": "Пожалуйста, предупреди в следующий раз",
+    "context": "shake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "slide-0",
+    "text": "Скользко!",
+    "context": "slide",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "slide-1",
+    "text": "Уиии~",
+    "context": "slide",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "slide-2",
+    "text": "Меня несёт!",
+    "context": "slide",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "slide-3",
+    "text": "Ветер в усах!",
+    "context": "slide",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "slide-4",
+    "text": "Лапки не тормозят",
+    "context": "slide",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "slide-5",
+    "text": "Я всё контролирую… почти",
+    "context": "slide",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "slide-6",
+    "text": "Съезжаю по экрану",
+    "context": "slide",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "slide-7",
+    "text": "Держись, хвост!",
+    "context": "slide",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hang-0",
+    "text": "Держусь!",
+    "context": "hang",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hang-1",
+    "text": "Помогите!",
+    "context": "hang",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hang-2",
+    "text": "Высоковато…",
+    "context": "hang",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hang-3",
+    "text": "Не отпущу!",
+    "context": "hang",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hang-4",
+    "text": "Лапки крепкие",
+    "context": "hang",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hang-5",
+    "text": "Я тут просто выглядываю",
+    "context": "hang",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hang-6",
+    "text": "С краешка всё видно",
+    "context": "hang",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hang-7",
+    "text": "Осторожно, хвост свисает",
+    "context": "hang",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hang_fall-0",
+    "text": "Ой-ой-ой!",
+    "context": "hang_fall",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hang_fall-1",
+    "text": "Не удержался!",
+    "context": "hang_fall",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hang_fall-2",
+    "text": "Падаю!",
+    "context": "hang_fall",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hang_fall-3",
+    "text": "Незапланированное приземление",
+    "context": "hang_fall",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hang_fall-4",
+    "text": "Приземление мягкое?",
+    "context": "hang_fall",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hang_fall-5",
+    "text": "Фух, я в порядке",
+    "context": "hang_fall",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hang_fall-6",
+    "text": "Поймал равновесие!",
+    "context": "hang_fall",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "peek-0",
+    "text": "Ку-ку!",
+    "context": "peek",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "peek-1",
+    "text": "Я тебя вижу",
+    "context": "peek",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "peek-2",
+    "text": "*подглядывает*",
+    "context": "peek",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "peek-3",
+    "text": "Ты тут?",
+    "context": "peek",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "peek-4",
+    "text": "Пик!",
+    "context": "peek",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "peek-5",
+    "text": "А вот и я",
+    "context": "peek",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "peek-6",
+    "text": "Выглянул на секунду",
+    "context": "peek",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "peek-7",
+    "text": "Не искал меня?",
+    "context": "peek",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "peek-8",
+    "text": "Секретный наблюдатель на связи",
+    "context": "peek",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "peek-9",
+    "text": "Край экрана — хорошее укрытие",
+    "context": "peek",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "found-0",
+    "text": "Нашёл меня!",
+    "context": "found",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "found-1",
+    "text": "Эх, раскусил",
+    "context": "found",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "found-2",
+    "text": "Я просто смотрел!",
+    "context": "found",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "found-3",
+    "text": "Ладно, сдаюсь",
+    "context": "found",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "found-4",
+    "text": "Как ты догадался?",
+    "context": "found",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "found-5",
+    "text": "Я почти не прятался",
+    "context": "found",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "found-6",
+    "text": "Ты очень внимательный",
+    "context": "found",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "found-7",
+    "text": "Пойман с поличным!",
+    "context": "found",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "poop-0",
+    "text": "Упс…",
+    "context": "poop",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "poop-1",
+    "text": "Это не я!",
+    "context": "poop",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "poop-2",
+    "text": "Ой…",
+    "context": "poop",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "poop-3",
+    "text": "*краснеет*",
+    "context": "poop",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "poop-4",
+    "text": "Кажется, тут нужна уборка",
+    "context": "poop",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "poop-5",
+    "text": "Я оставил маленький сюрприз",
+    "context": "poop",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "poop-6",
+    "text": "Не наступи, пожалуйста",
+    "context": "poop",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "poop-7",
+    "text": "Сделаю вид, что так и было",
+    "context": "poop",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "poop-8",
+    "text": "Всё, теперь легче",
+    "context": "poop",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "poop-9",
+    "text": "Прости за беспорядок!",
+    "context": "poop",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "clean-0",
+    "text": "Спасибо!",
+    "context": "clean",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "clean-1",
+    "text": "Прости…",
+    "context": "clean",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "clean-2",
+    "text": "Больше не буду!",
+    "context": "clean",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "clean-3",
+    "text": "Ты лучший",
+    "context": "clean",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "clean-4",
+    "text": "Чистота — красота",
+    "context": "clean",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "clean-5",
+    "text": "Вот теперь снова уютно",
+    "context": "clean",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "clean-6",
+    "text": "Уборка прошла успешно",
+    "context": "clean",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "clean-7",
+    "text": "Спасибо за заботу ♥",
+    "context": "clean",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "clean-8",
+    "text": "Лапки говорят спасибо",
+    "context": "clean",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "clean-9",
+    "text": "Порядок восстановлен!",
+    "context": "clean",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "stretch-0",
+    "text": "Потягушки!",
+    "context": "stretch",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "stretch-1",
+    "text": "Разминаю каждую лапку",
+    "context": "stretch",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "stretch-2",
+    "text": "После прогулки самое то",
+    "context": "stretch",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "stretch-3",
+    "text": "Спина говорит спасибо",
+    "context": "stretch",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "stretch-4",
+    "text": "Потянулся — и день лучше",
+    "context": "stretch",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "stretch-5",
+    "text": "Вот теперь я готов к делам",
+    "context": "stretch",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "yawn-0",
+    "text": "Ох, сладко зевнул",
+    "context": "yawn",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "yawn-1",
+    "text": "Кажется, пора отдохнуть",
+    "context": "yawn",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "yawn-2",
+    "text": "Зевота заразительная",
+    "context": "yawn",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "yawn-3",
+    "text": "Ещё не сплю, просто зеваю",
+    "context": "yawn",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "yawn-4",
+    "text": "Ммм, как хорошо потянуться",
+    "context": "yawn",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "yawn-5",
+    "text": "Сон пока подождёт",
+    "context": "yawn",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "groom-0",
+    "text": "Навожу красоту",
+    "context": "groom",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "groom-1",
+    "text": "Усы на месте, хвост на месте",
+    "context": "groom",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "groom-2",
+    "text": "Пора умыть лапки",
+    "context": "groom",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "groom-3",
+    "text": "Кто тут самый пушистый?",
+    "context": "groom",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "groom-4",
+    "text": "Проверка шерсти завершена",
+    "context": "groom",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "groom-5",
+    "text": "Красота требует внимания",
+    "context": "groom",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-x0",
+    "text": "Тянусь к новым пикселям",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-x1",
+    "text": "Сегодня отличный день",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "idle-x2",
+    "text": "Мурчу потихоньку",
+    "context": "idle",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "walk-x0",
+    "text": "Топ-топ!",
+    "context": "walk",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "walk-x1",
+    "text": "Иду гулять",
+    "context": "walk",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "walk-x2",
+    "text": "Куда пойдём?",
+    "context": "walk",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "pet-x0",
+    "text": "Ещё гладь!",
+    "context": "pet",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "pet-x1",
+    "text": "Мурр",
+    "context": "pet",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "pet-x2",
+    "text": "Приятно!",
+    "context": "pet",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "sleep-x0",
+    "text": "Сплю…",
+    "context": "sleep",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "sleep-x1",
+    "text": "Тсс…",
+    "context": "sleep",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "sleep-x2",
+    "text": "Сладких снов",
+    "context": "sleep",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "shake-x0",
+    "text": "Осторожно!",
+    "context": "shake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "shake-x1",
+    "text": "Трясёт!",
+    "context": "shake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "shake-x2",
+    "text": "Держусь!",
+    "context": "shake",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hang-x0",
+    "text": "Вишу!",
+    "context": "hang",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hang-x1",
+    "text": "Не упасть бы",
+    "context": "hang",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "hang-x2",
+    "text": "Высоко!",
+    "context": "hang",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "dance-x0",
+    "text": "Танцуем!",
+    "context": "dance",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "dance-x1",
+    "text": "Ля-ля-ля",
+    "context": "dance",
+    "weight": 1,
+    "enabled": true
+  },
+  {
+    "id": "dance-x2",
+    "text": "В ритме!",
+    "context": "dance",
+    "weight": 1,
+    "enabled": true
+  }
+]

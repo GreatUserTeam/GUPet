@@ -1,913 +1,852 @@
-package com.frizovdanya.pixpet
+package net.guteam.gupet
 
-import android.Manifest
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.content.res.Configuration
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.provider.Settings.Secure
+import android.webkit.JavascriptInterface
+import android.webkit.WebChromeClient
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.BackHandler
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.compose.setContent
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBars
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.ArrowBack
-import androidx.compose.material.icons.outlined.AutoAwesome
-import androidx.compose.material.icons.outlined.Bedtime
-import androidx.compose.material.icons.outlined.CenterFocusStrong
-import androidx.compose.material.icons.outlined.DeleteOutline
-import androidx.compose.material.icons.outlined.FileOpen
-import androidx.compose.material.icons.outlined.ChatBubbleOutline
-import androidx.compose.material.icons.outlined.CleaningServices
-import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.outlined.MusicNote
-import androidx.compose.material.icons.outlined.NotificationsActive
-import androidx.compose.material.icons.outlined.Palette
-import androidx.compose.material.icons.outlined.Pets
-import androidx.compose.material.icons.outlined.Sensors
-import androidx.compose.material.icons.outlined.Smartphone
-import androidx.compose.material.icons.outlined.Vibration
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.FilterChip
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Slider
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Switch
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import androidx.compose.ui.graphics.nativeCanvas
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role
-import androidx.compose.foundation.selection.toggleable
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsControllerCompat
+import org.json.JSONArray
+import org.json.JSONObject
+import java.util.Locale
+
+private const val SETTINGS_UI_PREFS = "gupet_ui"
+private const val KEY_LANG = "lang"
+private const val KEY_THEME = "ui_theme"
+private const val ASSET_URL = "file:///android_asset/gupet/index.html"
 
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent { GUPetTheme { GUPetApp() } }
-    }
-}
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun GUPetApp() {
-    var showAbout by remember { mutableStateOf(false) }
-    BackHandler(enabled = showAbout) { showAbout = false }
-    if (showAbout) GUPetAboutPage(onBack = { showAbout = false })
-    else GUPetSettingsScreen(onAbout = { showAbout = true })
-}
+    private lateinit var webView: WebView
+    private lateinit var overlayPermLauncher: ActivityResultLauncher<Intent>
+    private lateinit var skinPickerLauncher: ActivityResultLauncher<String>
+    private lateinit var exportSkinLauncher: ActivityResultLauncher<String>
+    private lateinit var framesPickerLauncher: ActivityResultLauncher<String>
+    private lateinit var framePickerLauncher: ActivityResultLauncher<String>
+    private var pendingFrameSkinId: String? = null
+    private var pendingFrameName: String? = null
+    private var pendingExportSkinId: String? = null
+    private var pendingFramesSkinId: String? = null
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun GUPetSettingsScreen(onAbout: () -> Unit) {
-    val context = LocalContext.current
-    val prefs = remember { PetPrefs.file(context) }
-    val snackbar = remember { SnackbarHostState() }
-    val scope = rememberCoroutineScope()
-
-    var overlayGranted by remember { mutableStateOf(Settings.canDrawOverlays(context)) }
-    var notificationAccess by remember { mutableStateOf(hasNotificationAccess(context)) }
-    var enabled by remember { mutableStateOf(prefs.getBoolean(PetPrefs.SHOW, false)) }
-    var poopEnabled by remember { mutableStateOf(prefs.getBoolean(PetPrefs.POOP, true)) }
-    var species by remember { mutableStateOf(PetSpecies.fromKey(prefs.getString(PetPrefs.SPECIES, PetSpecies.GUPET.key))) }
-    val initialSkinInfos = remember { GUPetSkinStore.list(context) }
-    var customSkinInfos by remember { mutableStateOf(initialSkinInfos) }
-    var customSkinId by remember {
-        mutableStateOf(prefs.getString(PetPrefs.CUSTOM_SKIN_ID, null).takeIf { id -> initialSkinInfos.any { it.id == id } })
-    }
-    var selectedCustomSkin by remember { mutableStateOf(GUPetSkinStore.load(context, customSkinId)) }
-    var skinToDelete by remember { mutableStateOf<GUPetSkinInfo?>(null) }
-    var palette by remember { mutableIntStateOf(prefs.getInt(PetPrefs.PALETTE, 0).coerceIn(0, PetPalettes.names.lastIndex)) }
-    var sizeDp by remember { mutableFloatStateOf(prefs.getFloat(PetPrefs.SIZE_DP, 4f).coerceIn(3f, 5f)) }
-    var wander by remember { mutableStateOf(prefs.getBoolean(PetPrefs.WANDER, true)) }
-    var phrases by remember { mutableStateOf(prefs.getBoolean(PetPrefs.PHRASES, true)) }
-    var gravity by remember { mutableStateOf(prefs.getBoolean(PetPrefs.GRAVITY, false)) }
-    var shake by remember { mutableStateOf(prefs.getBoolean(PetPrefs.SHAKE, true)) }
-    var haptics by remember { mutableStateOf(prefs.getBoolean(PetPrefs.HAPTICS, true)) }
-    var dance by remember { mutableStateOf(prefs.getBoolean(PetPrefs.DANCE, true)) }
-    var reactNotifications by remember { mutableStateOf(prefs.getBoolean(PetPrefs.REACT_NOTIFICATIONS, false)) }
-    var sleepMinutes by remember { mutableIntStateOf(prefs.getInt(PetPrefs.SLEEP_MINUTES, 3).coerceIn(0, 10)) }
-    var petsCount by remember { mutableIntStateOf(prefs.getInt(PetPrefs.PETS_COUNT, 0)) }
-    var poopsCleaned by remember { mutableIntStateOf(prefs.getInt(PetPrefs.POOPS_CLEANED, 0)) }
-    var pendingAction by remember { mutableStateOf(GUPetContract.ACTION_START) }
-    var pendingStart by remember { mutableStateOf(false) }
-    var pendingNotificationEnable by remember { mutableStateOf(false) }
-    var pendingDanceEnable by remember { mutableStateOf(false) }
-
-    DisposableEffect(prefs, context) {
-        val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
-            when (key) {
-                PetPrefs.PETS_COUNT -> petsCount = prefs.getInt(PetPrefs.PETS_COUNT, 0)
-                PetPrefs.POOPS_CLEANED -> poopsCleaned = prefs.getInt(PetPrefs.POOPS_CLEANED, 0)
-            }
+    override fun attachBaseContext(newBase: Context) {
+        val ui = newBase.getSharedPreferences(SETTINGS_UI_PREFS, MODE_PRIVATE)
+        val code = when (ui.getString(KEY_LANG, "auto")) {
+            "ru", "RU" -> "ru"
+            "en", "EN" -> "en"
+            else -> null
         }
-        prefs.registerOnSharedPreferenceChangeListener(listener)
-        onDispose { prefs.unregisterOnSharedPreferenceChangeListener(listener) }
-    }
-
-    val notificationPermissionLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.RequestPermission(),
-    ) {
-        dispatchPetAction(context, pendingAction, scope, snackbar)
-    }
-
-    val skinImportLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.GetContent(),
-    ) { uri ->
-        if (uri != null) {
-            scope.launch {
-                val result = runCatching {
-                    withContext(Dispatchers.IO) { GUPetSkinStore.importSkin(context, uri) }
-                }
-                result.onSuccess { info ->
-                    customSkinInfos = GUPetSkinStore.list(context)
-                    customSkinId = info.id
-                    selectedCustomSkin = withContext(Dispatchers.IO) { GUPetSkinStore.load(context, info.id) }
-                    val revision = prefs.getLong(PetPrefs.CUSTOM_SKIN_REVISION, 0L) + 1L
-                    prefs.edit()
-                        .putString(PetPrefs.CUSTOM_SKIN_ID, info.id)
-                        .putLong(PetPrefs.CUSTOM_SKIN_REVISION, revision)
-                        .apply()
-                    if (enabled) dispatchPetAction(context, GUPetContract.ACTION_SETTINGS_CHANGED, scope, snackbar)
-                    snackbar.showSnackbar("Скин «${info.name}» импортирован и выбран")
-                }.onFailure { error ->
-                    snackbar.showSnackbar(error.message ?: "Не удалось импортировать скин")
-                }
-            }
-        }
-    }
-
-    fun enableAndStart(action: String) {
-        enabled = true
-        prefs.edit().putBoolean(PetPrefs.SHOW, true).apply()
-        if (Build.VERSION.SDK_INT >= 33 &&
-            ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            pendingAction = action
-            notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-        } else {
-            dispatchPetAction(context, action, scope, snackbar)
-        }
-    }
-
-    val overlayPermissionLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.StartActivityForResult(),
-    ) {
-        overlayGranted = Settings.canDrawOverlays(context)
-        if (overlayGranted && pendingStart) {
-            pendingStart = false
-            enableAndStart(pendingAction)
-        } else if (!overlayGranted) {
-            pendingStart = false
-            scope.launch { snackbar.showSnackbar("Разрешение на отображение поверх приложений не выдано") }
-        }
-    }
-
-    val notificationAccessLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.StartActivityForResult(),
-    ) {
-        notificationAccess = hasNotificationAccess(context)
-        if (pendingNotificationEnable && notificationAccess) {
-            reactNotifications = true
-            prefs.edit().putBoolean(PetPrefs.REACT_NOTIFICATIONS, true).apply()
-        } else if (pendingNotificationEnable) {
-            reactNotifications = false
-            scope.launch { snackbar.showSnackbar("Доступ к уведомлениям не включён") }
-        }
-        pendingNotificationEnable = false
-        if (pendingDanceEnable && notificationAccess) {
-            dance = true
-            prefs.edit().putBoolean(PetPrefs.DANCE, true).apply()
-        } else if (pendingDanceEnable) {
-            scope.launch { snackbar.showSnackbar("Без доступа к медиасессиям питомец не сможет определить музыку") }
-        }
-        pendingDanceEnable = false
-        if (notificationAccess && enabled) {
-            dispatchPetAction(context, GUPetContract.ACTION_SETTINGS_CHANGED, scope, snackbar)
-        }
-    }
-
-    fun requestStart(action: String) {
-        if (!Settings.canDrawOverlays(context)) {
-            pendingAction = action
-            pendingStart = true
-            overlayPermissionLauncher.launch(
-                Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:${context.packageName}")),
-            )
+        if (code == null) {
+            super.attachBaseContext(newBase)
             return
         }
-        overlayGranted = true
-        enableAndStart(action)
+        val config = Configuration(newBase.resources.configuration)
+        config.setLocale(Locale(code))
+        super.attachBaseContext(newBase.createConfigurationContext(config))
     }
 
-    fun stopPet() {
-        enabled = false
-        prefs.edit().putBoolean(PetPrefs.SHOW, false).apply()
-        context.stopService(Intent(context, OverlayPetService::class.java))
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // П1: edge-to-edge + цвета system bars под тему.
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        applySystemBarsTheme()
+
+        webView = WebView(this).apply {
+            settings.javaScriptEnabled = true
+            settings.domStorageEnabled = true
+            settings.allowFileAccess = true
+            settings.allowFileAccessFromFileURLs = true
+            webViewClient = object : WebViewClient() {
+                override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
+                    val url = request.url.toString()
+                    return if (url.startsWith("http://") || url.startsWith("https://")) {
+                        runCatching { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) }
+                        true
+                    } else {
+                        false
+                    }
+                }
+            }
+            webChromeClient = WebChromeClient()
+            addJavascriptInterface(PrefsBridge(this@MainActivity), "AndroidPrefs")
+            addJavascriptInterface(PetBridge(this@MainActivity), "AndroidPet")
+        }
+        setContentView(webView)
+
+        overlayPermLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                val granted = Settings.canDrawOverlays(this)
+                eval("window.onOverlayPermissionChanged($granted)")
+            }
+        skinPickerLauncher =
+            registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+                if (uri == null) {
+                    eval("window.onSkinImported('', false)")
+                    return@registerForActivityResult
+                }
+                try {
+                    val info = GUPetSkinStore.importSkin(this, uri)
+                    eval("window.onSkinImported(${JSONObject.quote(info.name)}, true)")
+                } catch (e: Exception) {
+                    eval("window.onSkinImported('', false)")
+                }
+            }
+        exportSkinLauncher =
+            registerForActivityResult(ActivityResultContracts.CreateDocument("application/zip")) { uri ->
+                val id = pendingExportSkinId
+                pendingExportSkinId = null
+                if (uri == null || id == null) {
+                    eval("window.onSkinExported(false)")
+                    return@registerForActivityResult
+                }
+                try {
+                    val bytes = GUPetSkinStore.exportZip(this, id)
+                    contentResolver.openOutputStream(uri)?.use { it.write(bytes) }
+                        ?: throw IllegalArgumentException("Нет потока")
+                    eval("window.onSkinExported(true)")
+                } catch (e: Exception) {
+                    eval("window.onSkinExported(false)")
+                }
+            }
+        framesPickerLauncher =
+            registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+                val id = pendingFramesSkinId
+                pendingFramesSkinId = null
+                if (uri == null || id == null) {
+                    eval("window.onSkinFramesMerged('', 0)")
+                    return@registerForActivityResult
+                }
+                try {
+                    val stream = contentResolver.openInputStream(uri)
+                        ?: throw IllegalArgumentException("Нет потока")
+                    val added = stream.use { GUPetSkinStore.mergeFramesFromZip(this, id, it) }
+                    if (added > 0) {
+                        PetPrefs.file(this).edit()
+                            .putLong(PetPrefs.CUSTOM_SKIN_REVISION, System.currentTimeMillis())
+                            .apply()
+                    }
+                    eval("window.onSkinFramesMerged(${JSONObject.quote(id)}, $added)")
+                } catch (e: Exception) {
+                    eval("window.onSkinFramesMerged('', 0)")
+                }
+            }
+
+        framePickerLauncher =
+            registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+                val id = pendingFrameSkinId
+                val frame = pendingFrameName
+                pendingFrameSkinId = null
+                pendingFrameName = null
+                if (uri == null || id == null || frame == null) {
+                    eval("window.onFrameUploaded('', '', false)")
+                    return@registerForActivityResult
+                }
+                try {
+                    val bytes = contentResolver.openInputStream(uri)?.use { it.readBytes() }
+                        ?: throw IllegalArgumentException("Нет потока")
+                    val ok = GUPetSkinStore.writeFramePng(this, id, frame, bytes)
+                    eval("window.onFrameUploaded(${JSONObject.quote(id)}, ${JSONObject.quote(frame)}, $ok)")
+                    if (ok) {
+                        // PNG-кадры изменились при том же id: бампаем revision,
+                        // чтобы listener перезагрузил bitmap скина.
+                        PetPrefs.file(this).edit()
+                            .putLong(PetPrefs.CUSTOM_SKIN_REVISION, System.currentTimeMillis())
+                            .apply()
+                        runCatching {
+                            startService(
+                                Intent(this, OverlayPetService::class.java)
+                                    .setAction(GUPetContract.ACTION_SETTINGS_CHANGED)
+                            )
+                        }
+                    }
+                } catch (e: Exception) {
+                    eval("window.onFrameUploaded('', '', false)")
+                }
+            }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                webView.evaluateJavascript(
+                    "(function(){var s=document.querySelectorAll(" +
+                        "'.settings-overlay.active,.color-picker-overlay.active,.confirm-overlay.active'" +
+                        ");if(!s.length)return false;" +
+                        "s.forEach(function(e){e.classList.remove('active')});return true;})()"
+                ) { r ->
+                    if (r != "true") {
+                        isEnabled = false
+                        onBackPressedDispatcher.onBackPressed()
+                    }
+                }
+            }
+        })
+
+        webView.loadUrl(ASSET_URL)
     }
 
-    fun saveBoolean(key: String, value: Boolean) {
-        prefs.edit().putBoolean(key, value).apply()
+    override fun onResume() {
+        super.onResume()
+        // П3: при возврате из системных настроек обновить статусы разрешений.
+        runCatching { webView.evaluateJavascript("window.refreshPermissions && window.refreshPermissions()", null) }
     }
 
-    fun selectCustomSkin(id: String?) {
-        customSkinId = id
-        selectedCustomSkin = GUPetSkinStore.load(context, id)
-        val editor = prefs.edit()
-        if (id == null) editor.remove(PetPrefs.CUSTOM_SKIN_ID)
-        else editor.putString(PetPrefs.CUSTOM_SKIN_ID, id)
-        editor.apply()
-        if (enabled) dispatchPetAction(context, GUPetContract.ACTION_SETTINGS_CHANGED, scope, snackbar)
+    override fun onDestroy() {
+        webView.destroy()
+        super.onDestroy()
     }
 
-    skinToDelete?.let { skin ->
-        AlertDialog(
-            onDismissRequest = { skinToDelete = null },
-            title = { Text("Удалить скин?") },
-            text = { Text("«${skin.name}» будет удалён с устройства.") },
-            confirmButton = {
-                TextButton(onClick = {
-                    GUPetSkinStore.delete(context, skin.id)
-                    customSkinInfos = GUPetSkinStore.list(context)
-                    if (customSkinId == skin.id) selectCustomSkin(null)
-                    skinToDelete = null
-                }) { Text("Удалить") }
-            },
-            dismissButton = { TextButton(onClick = { skinToDelete = null }) { Text("Отмена") } },
+    fun eval(js: String) {
+        runOnUiThread { runCatching { webView.evaluateJavascript(js, null) } }
+    }
+
+    fun launchOverlayPermission() {
+        overlayPermLauncher.launch(
+            Intent(
+                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:$packageName")
+            )
         )
     }
 
-    val scheme = MaterialTheme.colorScheme
-    Scaffold(
-        contentWindowInsets = WindowInsets.statusBars,
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text("GUPet", fontWeight = FontWeight.Bold, fontSize = 20.sp)
-                        Text(stringResource(R.string.app_subtitle), style = MaterialTheme.typography.labelSmall, color = scheme.onSurfaceVariant)
-                    }
-                },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = scheme.background),
+    fun launchSkinPicker() {
+        skinPickerLauncher.launch("*/*")
+    }
+
+    fun pendingExportSkin(id: String) {
+        pendingExportSkinId = id
+        val safe = id.replace(Regex("[^a-z0-9_-]+"), "-").ifBlank { "skin" }
+        exportSkinLauncher.launch("$safe.gupet")
+    }
+
+    fun pendingFramesSkin(id: String) {
+        pendingFramesSkinId = id
+        framesPickerLauncher.launch("*/*")
+    }
+
+    fun launchFramePicker(skinId: String, frameName: String) {
+        pendingFrameSkinId = skinId
+        pendingFrameName = frameName
+        framePickerLauncher.launch("image/png")
+    }
+
+    /**
+     * Красит status/navigation bars под тему из gupet_ui.
+     * webView НЕ используется — только window.decorView, поэтому безопасно
+     * вызывать в onCreate до инициализации webView.
+     */
+    fun applySystemBarsTheme() {
+        val theme = getSharedPreferences(SETTINGS_UI_PREFS, MODE_PRIVATE)
+            .getString(KEY_THEME, "dark") ?: "dark"
+        val bg = if (theme == "light") Color.WHITE else Color.parseColor("#0b0b0b")
+        window.statusBarColor = bg
+        window.navigationBarColor = bg
+        WindowInsetsControllerCompat(window, window.decorView).apply {
+            isAppearanceLightStatusBars = (theme == "light")
+            isAppearanceLightNavigationBars = (theme == "light")
+        }
+    }
+}
+
+class PrefsBridge(private val activity: MainActivity) {
+
+    private val uiPrefs
+        get() = activity.getSharedPreferences(SETTINGS_UI_PREFS, Context.MODE_PRIVATE)
+
+    private fun android.content.SharedPreferences.Editor.putStringOrRemove(
+        key: String,
+        value: String?,
+    ): android.content.SharedPreferences.Editor {
+        if (value.isNullOrEmpty()) remove(key) else putString(key, value)
+        return this
+    }
+
+    @JavascriptInterface
+    fun getString(key: String): String? = uiPrefs.getString(key, null)
+
+    @JavascriptInterface
+    fun setString(key: String, value: String) {
+        uiPrefs.edit().putString(key, value).apply()
+        if (key == KEY_LANG) activity.runOnUiThread { activity.recreate() }
+    }
+
+    @JavascriptInterface
+    fun setSystemBarsColor(hex: String) {
+        // webView не трогаем — только decorView (см. applySystemBarsTheme).
+        activity.runOnUiThread { activity.applySystemBarsTheme() }
+    }
+
+    @JavascriptInterface
+    fun getStatusBarHeightPx(): Int {
+        val id = activity.resources.getIdentifier("status_bar_height", "dimen", "android")
+        return if (id != 0) runCatching { activity.resources.getDimensionPixelSize(id) }.getOrDefault(0) else 0
+    }
+
+    @JavascriptInterface
+    fun setPhrases(json: String) {
+        runCatching {
+            val arr = JSONArray(json)
+            val list = List(arr.length()) { i ->
+                val p = arr.getJSONObject(i)
+                Phrase(
+                    id = p.optString("id", "p$i"),
+                    text = p.optString("text", ""),
+                    context = p.optString("context", "idle"),
+                    weight = p.optInt("weight", 1),
+                    enabled = p.optBoolean("enabled", true),
+                )
+            }.filter { it.text.isNotBlank() }
+            PetPhrasesStore.save(activity, list)
+        }
+        // Сервис сбросит кэш реплик через свой слушатель настроек.
+        runCatching {
+            activity.startService(
+                Intent(activity, OverlayPetService::class.java)
+                    .setAction(GUPetContract.ACTION_SETTINGS_CHANGED)
             )
-        },
-        snackbarHost = { SnackbarHost(snackbar) },
-    ) { innerPadding ->
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(start = 18.dp, end = 18.dp, top = innerPadding.calculateTopPadding() + 8.dp, bottom = 24.dp + WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()),
-            verticalArrangement = Arrangement.spacedBy(14.dp),
-        ) {
-            item {
-                HeroCard(
-                    enabled = enabled,
-                    overlayGranted = overlayGranted,
-                    species = species,
-                    palette = palette,
-                    customSkin = selectedCustomSkin,
-                    onToggle = { checked ->
-                        if (checked) requestStart(GUPetContract.ACTION_START) else stopPet()
-                    },
+        }
+    }
+
+    @JavascriptInterface
+    fun getPhrases(): String {
+        val arr = JSONArray()
+        PetPhrasesStore.load(activity).forEach { p ->
+            arr.put(
+                JSONObject()
+                    .put("id", p.id)
+                    .put("text", p.text)
+                    .put("context", p.context)
+                    .put("weight", p.weight)
+                    .put("enabled", p.enabled)
+            )
+        }
+        return arr.toString()
+    }
+
+    @JavascriptInterface
+    fun getPetSettings(): String {
+        val s = PetPrefs.load(activity)
+        return JSONObject()
+            .put("species", s.species.key)
+            .put("customSkinId", s.customSkinId)
+            .put("palette", s.palette)
+            .put("colorHex", s.colorHex)
+            .put("sizeDp", s.sizeDp.toDouble())
+            .put("wander", s.wander)
+            .put("phrases", s.phrases)
+            .put("gravity", s.gravity)
+            .put("shake", s.shake)
+            .put("haptics", s.haptics)
+            .put("edgeVibration", s.edgeVibration)
+            .put("poop", s.poop)
+            .put("sleepMinutes", s.sleepMinutes)
+            .put("reactNotifications", s.reactNotifications)
+            .put("dance", s.dance)
+            .put("persistPosition", s.persistPosition)
+            .put("maxPoops", s.maxPoops)
+            .put("poopSize", s.poopSize.toDouble())
+            .put("poopInterval", s.poopInterval.toDouble())
+            .put("poopColor", s.poopColor)
+            .put("poopFadeMs", s.poopFadeMs)
+            .put("weight", s.weight.toDouble())
+            .put("reactToPoop", s.reactToPoop)
+            .put("reactToOtherPets", s.reactToOtherPets)
+            .put("wakeOnPetTouch", s.wakeOnPetTouch)
+            .put("petsCollide", s.petsCollide)
+            .put("gravityStrength", s.gravityStrength.toDouble())
+            .put("slideFriction", s.slideFriction.toDouble())
+            .put("phraseColor", s.phraseColor)
+            .put("phraseFontSize", s.phraseFontSize.toDouble())
+            .put("phraseBgColor", s.phraseBgColor)
+            .put("phraseBgAlpha", s.phraseBgAlpha.toDouble())
+            .put("phraseOutlineColor", s.phraseOutlineColor)
+            .put("phraseOutlineWidth", s.phraseOutlineWidth.toDouble())
+            .put("phraseDurationMs", s.phraseDurationMs)
+            .put("phraseFadeMs", s.phraseFadeMs)
+            .put("phraseFadeStyle", s.phraseFadeStyle)
+            .toString()
+    }
+
+    @JavascriptInterface
+    fun setPetSettings(json: String) {
+        val o = runCatching { JSONObject(json) }.getOrNull() ?: return
+        val prefs = PetPrefs.file(activity)
+        prefs.edit()
+            .putString(PetPrefs.SPECIES, PetSpecies.fromKey(o.optString("species", PetSpecies.GUPET.key)).key)
+            .putInt(PetPrefs.PALETTE, o.optInt("palette", prefs.getInt(PetPrefs.PALETTE, 0)))
+            .putStringOrRemove(PetPrefs.COLOR_HEX, o.optString("colorHex", null))
+            .putFloat(PetPrefs.SIZE_DP, o.optDouble("sizeDp", prefs.getFloat(PetPrefs.SIZE_DP, 4f).toDouble()).toFloat())
+            .putBoolean(PetPrefs.WANDER, o.optBoolean("wander", prefs.getBoolean(PetPrefs.WANDER, true)))
+            .putBoolean(PetPrefs.PHRASES, o.optBoolean("phrases", prefs.getBoolean(PetPrefs.PHRASES, true)))
+            .putBoolean(PetPrefs.GRAVITY, o.optBoolean("gravity", prefs.getBoolean(PetPrefs.GRAVITY, false)))
+            .putBoolean(PetPrefs.SHAKE, o.optBoolean("shake", prefs.getBoolean(PetPrefs.SHAKE, true)))
+            .putBoolean(PetPrefs.HAPTICS, o.optBoolean("haptics", prefs.getBoolean(PetPrefs.HAPTICS, true)))
+            .putBoolean(PetPrefs.EDGE_VIBRATION, o.optBoolean("edgeVibration", prefs.getBoolean(PetPrefs.EDGE_VIBRATION, true)))
+            .putBoolean(PetPrefs.POOP, o.optBoolean("poop", prefs.getBoolean(PetPrefs.POOP, true)))
+            .putInt(PetPrefs.SLEEP_MINUTES, o.optInt("sleepMinutes", prefs.getInt(PetPrefs.SLEEP_MINUTES, 3)))
+            .putBoolean(PetPrefs.REACT_NOTIFICATIONS, o.optBoolean("reactNotifications", prefs.getBoolean(PetPrefs.REACT_NOTIFICATIONS, false)))
+            .putBoolean(PetPrefs.DANCE, o.optBoolean("dance", prefs.getBoolean(PetPrefs.DANCE, true)))
+            .putBoolean(PetPrefs.PERSIST_POSITION, o.optBoolean("persistPosition", prefs.getBoolean(PetPrefs.PERSIST_POSITION, true)))
+            .putInt(PetPrefs.MAX_POOPS, o.optInt("maxPoops", prefs.getInt(PetPrefs.MAX_POOPS, 3)))
+            .putFloat(PetPrefs.POOP_SIZE, o.optDouble("poopSize", prefs.getFloat(PetPrefs.POOP_SIZE, 1f).toDouble()).toFloat())
+            .putFloat(PetPrefs.POOP_INTERVAL, o.optDouble("poopInterval", prefs.getFloat(PetPrefs.POOP_INTERVAL, 1f).toDouble()).toFloat())
+            .putString(PetPrefs.POOP_COLOR, o.optString("poopColor", prefs.getString(PetPrefs.POOP_COLOR, "#8b5a2b")))
+            .putInt(PetPrefs.POOP_FADE_MS, o.optInt("poopFadeMs", prefs.getInt(PetPrefs.POOP_FADE_MS, 500)))
+            .putFloat(PetPrefs.WEIGHT, o.optDouble("weight", prefs.getFloat(PetPrefs.WEIGHT, 1f).toDouble()).toFloat())
+            .putBoolean(PetPrefs.REACT_TO_POOP, o.optBoolean("reactToPoop", prefs.getBoolean(PetPrefs.REACT_TO_POOP, true)))
+            .putBoolean(PetPrefs.REACT_TO_OTHER_PETS, o.optBoolean("reactToOtherPets", prefs.getBoolean(PetPrefs.REACT_TO_OTHER_PETS, true)))
+            .putBoolean(PetPrefs.WAKE_ON_PET_TOUCH, o.optBoolean("wakeOnPetTouch", prefs.getBoolean(PetPrefs.WAKE_ON_PET_TOUCH, true)))
+            .putBoolean(PetPrefs.PETS_COLLIDE, o.optBoolean("petsCollide", prefs.getBoolean(PetPrefs.PETS_COLLIDE, true)))
+            .putFloat(PetPrefs.GRAVITY_STRENGTH, o.optDouble("gravityStrength", prefs.getFloat(PetPrefs.GRAVITY_STRENGTH, 1f).toDouble()).toFloat())
+            .putFloat(PetPrefs.SLIDE_FRICTION, o.optDouble("slideFriction", prefs.getFloat(PetPrefs.SLIDE_FRICTION, 1f).toDouble()).toFloat())
+            .putString(PetPrefs.PHRASE_COLOR, o.optString("phraseColor", prefs.getString(PetPrefs.PHRASE_COLOR, "#ffffff")))
+            .putFloat(PetPrefs.PHRASE_FONT_SIZE, o.optDouble("phraseFontSize", prefs.getFloat(PetPrefs.PHRASE_FONT_SIZE, 14f).toDouble()).toFloat())
+            .putString(PetPrefs.PHRASE_BG_COLOR, o.optString("phraseBgColor", prefs.getString(PetPrefs.PHRASE_BG_COLOR, "#0b0b0b")))
+            .putFloat(PetPrefs.PHRASE_BG_ALPHA, o.optDouble("phraseBgAlpha", prefs.getFloat(PetPrefs.PHRASE_BG_ALPHA, 0.85f).toDouble()).toFloat())
+            .putString(PetPrefs.PHRASE_OUTLINE_COLOR, o.optString("phraseOutlineColor", prefs.getString(PetPrefs.PHRASE_OUTLINE_COLOR, "#ff4d30")))
+            .putFloat(PetPrefs.PHRASE_OUTLINE_WIDTH, o.optDouble("phraseOutlineWidth", prefs.getFloat(PetPrefs.PHRASE_OUTLINE_WIDTH, 2f).toDouble()).toFloat())
+            .putInt(PetPrefs.PHRASE_DURATION_MS, o.optInt("phraseDurationMs", prefs.getInt(PetPrefs.PHRASE_DURATION_MS, 3000)))
+            .putInt(PetPrefs.PHRASE_FADE_MS, o.optInt("phraseFadeMs", prefs.getInt(PetPrefs.PHRASE_FADE_MS, 400)))
+            .putString(PetPrefs.PHRASE_FADE_STYLE, o.optString("phraseFadeStyle", prefs.getString(PetPrefs.PHRASE_FADE_STYLE, "fade")))
+            .apply()
+        // Сигнал сервису: мгновенно перечитать настройки/скин (как setPhrases/applySkin).
+        // Один listener на prefs недостаточен: доставка может схлопываться,
+        // а этот путь — самый частый (слайдеры/сегменты/цвета).
+        runCatching {
+            activity.startService(
+                Intent(activity, OverlayPetService::class.java)
+                    .setAction(GUPetContract.ACTION_SETTINGS_CHANGED)
+            )
+        }
+    }
+}
+
+class PetBridge(private val activity: MainActivity) {
+
+    private fun petPrefs() = PetPrefs.file(activity)
+
+    @JavascriptInterface
+    fun start() {
+        activity.startForegroundService(
+            Intent(activity, OverlayPetService::class.java).setAction(GUPetContract.ACTION_START)
+        )
+    }
+
+    @JavascriptInterface
+    fun stop() {
+        activity.startService(
+            Intent(activity, OverlayPetService::class.java).setAction(GUPetContract.ACTION_STOP)
+        )
+    }
+
+    @JavascriptInterface
+    fun isRunning(): Boolean = petPrefs().getBoolean(PetPrefs.SHOW, false)
+
+    @JavascriptInterface
+    fun hasOverlayPermission(): Boolean = Settings.canDrawOverlays(activity)
+
+    @JavascriptInterface
+    fun requestOverlayPermission() {
+        activity.runOnUiThread { activity.launchOverlayPermission() }
+    }
+
+    @JavascriptInterface
+    fun hasPostNotifications(): Boolean {
+        if (Build.VERSION.SDK_INT < 33) return true
+        return ContextCompat.checkSelfPermission(
+            activity, android.Manifest.permission.POST_NOTIFICATIONS
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    @JavascriptInterface
+    fun openOverlaySettings() {
+        activity.runOnUiThread {
+            runCatching {
+                activity.startActivity(
+                    Intent(
+                        Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:${activity.packageName}")
+                    )
                 )
             }
+        }
+    }
 
-            item {
-                AnimatedVisibility(visible = !overlayGranted) {
-                    Card(
-                        shape = RoundedCornerShape(24.dp),
-                        colors = CardDefaults.cardColors(containerColor = scheme.tertiaryContainer),
-                    ) {
-                        Row(Modifier.fillMaxWidth().padding(18.dp), verticalAlignment = Alignment.CenterVertically) {
-                            Icon(Icons.Outlined.Smartphone, contentDescription = null, tint = scheme.onTertiaryContainer, modifier = Modifier.size(28.dp))
-                            Spacer(Modifier.width(14.dp))
-                            Column(Modifier.weight(1f)) {
-                                Text("Нужно разрешение", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold, color = scheme.onTertiaryContainer)
-                                Text("Android попросит разрешить GUPet показываться поверх других приложений.", style = MaterialTheme.typography.bodySmall, color = scheme.onTertiaryContainer)
-                            }
-                            Button(onClick = { requestStart(GUPetContract.ACTION_START) }) { Text("Разрешить") }
-                        }
-                    }
-                }
+    @JavascriptInterface
+    fun openNotificationSettings() {
+        activity.runOnUiThread {
+            runCatching {
+                activity.startActivity(Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"))
             }
+        }
+    }
 
-            item { SectionTitle("Выбери питомца", "Питомец GUPet, кошка или собака", Icons.Outlined.Pets) }
-            item {
-                Row(horizontalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
-                    PetSpecies.entries.forEach { item ->
-                        SpeciesCard(
-                            species = item,
-                            selected = species == item && customSkinId == null,
-                            palette = palette,
-                            modifier = Modifier.weight(1f),
-                            onClick = {
-                                species = item
-                                prefs.edit().putString(PetPrefs.SPECIES, item.key).apply()
-                                if (customSkinId != null) selectCustomSkin(null)
-                            },
-                        )
-                    }
-                }
-            }
-
-            item {
-                Card(shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = scheme.surfaceContainerLow)) {
-                    Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(Icons.Outlined.Palette, contentDescription = null, tint = scheme.primary)
-                            Spacer(Modifier.width(10.dp))
-                            Column(Modifier.weight(1f)) {
-                                Text("Пользовательские скины", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-                                Text("Скин заменяет вид и окрас; анимации питомца сохраняются.", style = MaterialTheme.typography.bodySmall, color = scheme.onSurfaceVariant)
-                            }
-                        }
-                        Column(verticalArrangement = Arrangement.spacedBy(6.dp), horizontalAlignment = Alignment.Start) {
-                            FilterChip(
-                                selected = customSkinId == null,
-                                onClick = { selectCustomSkin(null) },
-                                label = { Text("Встроенный вид") },
-                            )
-                            OutlinedButton(onClick = { skinImportLauncher.launch("*/*") }) {
-                                Icon(Icons.Outlined.FileOpen, contentDescription = null)
-                                Spacer(Modifier.width(7.dp))
-                                Text("Импорт .gupet")
-                            }
-                        }
-                        Text("PNG-кадры 18 × 13 px · архивы размером до 2 МБ", style = MaterialTheme.typography.labelSmall, color = scheme.onSurfaceVariant)
-                        if (customSkinInfos.isEmpty()) {
-                            Text("Пока нет добавленных скинов. Формат и пример архива — в документации.", style = MaterialTheme.typography.bodySmall, color = scheme.onSurfaceVariant)
-                        } else {
-                            customSkinInfos.forEach { skin ->
-                                Card(
-                                    onClick = { selectCustomSkin(skin.id) },
-                                    shape = RoundedCornerShape(18.dp),
-                                    colors = CardDefaults.cardColors(containerColor = if (customSkinId == skin.id) scheme.secondaryContainer else scheme.surface),
-                                    border = if (customSkinId == skin.id) androidx.compose.foundation.BorderStroke(1.5.dp, scheme.primary) else null,
-                                ) {
-                                    Row(Modifier.fillMaxWidth().padding(start = 14.dp, end = 6.dp, top = 7.dp, bottom = 7.dp), verticalAlignment = Alignment.CenterVertically) {
-                                        Column(Modifier.weight(1f)) {
-                                            Text(skin.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
-                                            Text("Автор: ${skin.author}", style = MaterialTheme.typography.bodySmall, color = scheme.onSurfaceVariant)
-                                            if (customSkinId == skin.id) Text("Выбрано", style = MaterialTheme.typography.labelSmall, color = scheme.primary)
-                                        }
-                                        IconButton(onClick = { skinToDelete = skin }) {
-                                            Icon(Icons.Outlined.DeleteOutline, contentDescription = "Удалить скин ${skin.name}", tint = scheme.error)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            item {
-                Card(shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = scheme.surfaceContainerLow)) {
-                    Column(Modifier.fillMaxWidth().padding(horizontal = 18.dp, vertical = 16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(Icons.Outlined.Palette, contentDescription = null, tint = scheme.primary)
-                            Spacer(Modifier.width(10.dp))
-                            Column {
-                                Text("Окрас", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-                                Text(
-                                    if (customSkinId == null) PetPalettes.names[palette] else "Сохранённый окрас встроенного вида: ${PetPalettes.names[palette]}",
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = scheme.onSurfaceVariant,
-                                )
-                            }
-                        }
-                        Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
-                            PALETTE_COLORS.forEachIndexed { index, color ->
-                                PaletteSwatch(
-                                    color = color,
-                                    selected = palette == index,
-                                    label = PetPalettes.names[index],
-                                    modifier = Modifier.weight(1f),
-                                    onClick = {
-                                        palette = index
-                                        prefs.edit().putInt(PetPrefs.PALETTE, index).apply()
-                                    },
-                                )
-                            }
-                        }
-                        Spacer(Modifier.height(2.dp))
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text("Размер", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, modifier = Modifier.weight(1f))
-                            Text("${sizeDp.toInt()} dp", style = MaterialTheme.typography.labelLarge, color = scheme.primary)
-                        }
-                        Slider(
-                            value = sizeDp,
-                            onValueChange = { sizeDp = it },
-                            onValueChangeFinished = { prefs.edit().putFloat(PetPrefs.SIZE_DP, sizeDp).apply() },
-                            valueRange = 3f..5f,
-                            steps = 1,
-                        )
-                        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                            Text("Маленький", style = MaterialTheme.typography.labelSmall, color = scheme.onSurfaceVariant)
-                            Text("Большой", style = MaterialTheme.typography.labelSmall, color = scheme.onSurfaceVariant)
-                        }
-                    }
-                }
-            }
-
-            item { SectionTitle("Кучки", "Можно вызвать в любой момент и убрать одним касанием", Icons.Outlined.CleaningServices) }
-            item {
-                Card(shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = scheme.secondaryContainer)) {
-                    Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text("💩", fontSize = 28.sp)
-                            Spacer(Modifier.width(12.dp))
-                            Column(Modifier.weight(1f)) {
-                                Text("Самостоятельные кучки", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold, color = scheme.onSecondaryContainer)
-                                Text("Можно отключить случайные события. Ручной вызов доступен в любой момент.", style = MaterialTheme.typography.bodySmall, color = scheme.onSecondaryContainer)
-                            }
-                            Switch(checked = poopEnabled, onCheckedChange = {
-                                poopEnabled = it
-                                saveBoolean(PetPrefs.POOP, it)
-                            })
-                        }
-                        Row(horizontalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
-                            FilledTonalButton(
-                                onClick = { requestStart(GUPetContract.ACTION_POOP_NOW) },
-                                modifier = Modifier.weight(1f),
-                                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 12.dp),
-                            ) { Text("Покакать сейчас", maxLines = 1, overflow = TextOverflow.Ellipsis) }
-                            OutlinedButton(
-                                onClick = {
-                                    if (enabled) dispatchPetAction(context, GUPetContract.ACTION_CLEAN_POOPS, scope, snackbar)
-                                    else scope.launch { snackbar.showSnackbar("Сначала включи питомца") }
-                                },
-                                enabled = enabled,
-                                modifier = Modifier.weight(1f),
-                                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 12.dp),
-                            ) { Text("Убрать кучки", maxLines = 1, overflow = TextOverflow.Ellipsis) }
-                        }
-                    }
-                }
-            }
-
-            item { SectionTitle("Поведение", "Питомец живёт своей маленькой жизнью", Icons.Outlined.AutoAwesome) }
-            item {
-                Card(shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = scheme.surfaceContainerLow)) {
-                    Column {
-                        SettingSwitchRow(Icons.Outlined.AutoAwesome, "Гуляет сам", "Ходит, прыгает, машет и иногда выглядывает из-за края", wander) {
-                            wander = it; saveBoolean(PetPrefs.WANDER, it)
-                        }
-                        SettingSwitchRow(Icons.Outlined.ChatBubbleOutline, "Реплики", "Короткие облачка во время игры", phrases) {
-                            phrases = it; saveBoolean(PetPrefs.PHRASES, it)
-                        }
-                        SettingSwitchRow(Icons.Outlined.Sensors, "Гравитация и наклон", "Падает вниз и скользит, если наклонить телефон", gravity) {
-                            gravity = it; saveBoolean(PetPrefs.GRAVITY, it)
-                        }
-                        SettingSwitchRow(Icons.Outlined.Smartphone, "Реагирует на встряхивание", "Потряси телефон — питомец кувыркнётся", shake) {
-                            shake = it; saveBoolean(PetPrefs.SHAKE, it)
-                        }
-                        SettingSwitchRow(Icons.Outlined.Vibration, "Тактильный отклик", "Лёгкая вибрация при касаниях", haptics) {
-                            haptics = it; saveBoolean(PetPrefs.HAPTICS, it)
-                        }
-                        SettingSwitchRow(
-                            Icons.Outlined.MusicNote,
-                            "Танцует под музыку",
-                            if (notificationAccess) "Реагирует на активные медиаплееры и меняет танцевальные движения" else "Разреши доступ к медиасессиям в блоке ниже — звук не записывается",
-                            dance,
-                        ) { checked ->
-                            if (checked && !notificationAccess) {
-                                pendingDanceEnable = true
-                                notificationAccessLauncher.launch(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
-                            } else {
-                                dance = checked
-                                saveBoolean(PetPrefs.DANCE, checked)
-                            }
-                        }
-                        SettingSwitchRow(Icons.Outlined.NotificationsActive, "Реакции на Telegram", "Распознаёт приветствия, смех и сердечки в уведомлениях", reactNotifications) {
-                            if (it && !notificationAccess) {
-                                pendingNotificationEnable = true
-                                notificationAccessLauncher.launch(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
-                            } else {
-                                reactNotifications = it
-                                saveBoolean(PetPrefs.REACT_NOTIFICATIONS, it)
-                            }
-                        }
-                    }
-                }
-            }
-
-            item {
-                AnimatedVisibility(visible = !notificationAccess) {
-                    Card(shape = RoundedCornerShape(22.dp), colors = CardDefaults.cardColors(containerColor = scheme.surfaceContainerLow)) {
-                        Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-                            Icon(Icons.Outlined.NotificationsActive, contentDescription = null, tint = scheme.primary)
-                            Spacer(Modifier.width(12.dp))
-                            Column(Modifier.weight(1f)) {
-                                Text("Доступ для музыки и уведомлений", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
-                                Text("Нужен для определения воспроизведения музыки и реакций на Telegram-уведомления. Текст проверяется локально и не сохраняется.", style = MaterialTheme.typography.bodySmall, color = scheme.onSurfaceVariant)
-                            }
-                            OutlinedButton(onClick = { notificationAccessLauncher.launch(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)) }) { Text("Настроить") }
-                        }
-                    }
-                }
-            }
-
-            item {
-                Card(shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = scheme.surfaceContainerLow)) {
-                    Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(Icons.Outlined.Bedtime, contentDescription = null, tint = scheme.primary)
-                            Spacer(Modifier.width(10.dp))
-                            Column {
-                                Text("Когда засыпать", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-                                Text(if (sleepMinutes == 0) "Не засыпает сам" else "После $sleepMinutes мин. бездействия", style = MaterialTheme.typography.bodySmall, color = scheme.onSurfaceVariant)
-                            }
-                        }
-                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
-                            listOf(1, 3, 10, 0).forEach { minutes ->
-                                FilterChip(
-                                    selected = sleepMinutes == minutes,
-                                    onClick = {
-                                        sleepMinutes = minutes
-                                        prefs.edit().putInt(PetPrefs.SLEEP_MINUTES, minutes).apply()
-                                    },
-                                    label = { Text(if (minutes == 0) "Никогда" else "$minutes мин") },
-                                    modifier = Modifier.weight(1f),
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-
-            item { SectionTitle("Ещё", "Быстрые действия и статистика", Icons.Outlined.CenterFocusStrong) }
-            item {
-                Card(shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = scheme.surfaceContainerLow)) {
-                    Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Row(horizontalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
-                            OutlinedButton(
-                                onClick = { if (enabled) dispatchPetAction(context, GUPetContract.ACTION_RECENTER, scope, snackbar) },
-                                enabled = enabled,
-                                modifier = Modifier.weight(1f),
-                            ) { Icon(Icons.Outlined.CenterFocusStrong, contentDescription = null); Spacer(Modifier.width(7.dp)); Text("В центр") }
-                            FilledTonalButton(
-                                onClick = { if (enabled) stopPet() else requestStart(GUPetContract.ACTION_START) },
-                                modifier = Modifier.weight(1f),
-                            ) { Icon(Icons.Outlined.Pets, contentDescription = null); Spacer(Modifier.width(7.dp)); Text(if (enabled) "Спрятать" else "Позвать") }
-                        }
-                        Row(horizontalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
-                            StatTile("Погладили", petsCount.toString(), "💗", Modifier.weight(1f))
-                            StatTile("Убрано кучек", poopsCleaned.toString(), "🧹", Modifier.weight(1f))
-                        }
-                    }
-                }
-            }
-
-            item {
-                Card(
-                    onClick = onAbout,
-                    shape = RoundedCornerShape(24.dp),
-                    colors = CardDefaults.cardColors(containerColor = scheme.primaryContainer),
-                ) {
-                    Row(Modifier.fillMaxWidth().padding(18.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Outlined.Info, contentDescription = null, tint = scheme.onPrimaryContainer)
-                        Spacer(Modifier.width(12.dp))
-                        Column(Modifier.weight(1f)) {
-                            Text("О команде и GUPet", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold, color = scheme.onPrimaryContainer)
-                            Text("Версия ${BuildConfig.VERSION_NAME} · данные хранятся на устройстве", style = MaterialTheme.typography.bodySmall, color = scheme.onPrimaryContainer)
-                        }
-                    }
+    @JavascriptInterface
+    fun requestPostNotifications() {
+        activity.runOnUiThread {
+            if (Build.VERSION.SDK_INT >= 33) {
+                runCatching {
+                    activity.requestPermissions(
+                        arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 1001
+                    )
                 }
             }
         }
     }
-}
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun GUPetAboutPage(onBack: () -> Unit) {
-    val context = LocalContext.current
-    val scheme = MaterialTheme.colorScheme
-    Scaffold(
-        contentWindowInsets = WindowInsets.statusBars,
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text("О GUPet", fontWeight = FontWeight.Bold) },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Outlined.ArrowBack, contentDescription = "Назад")
-                    }
-                },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = scheme.background),
+    @JavascriptInterface
+    fun importSkin() {
+        activity.runOnUiThread { activity.launchSkinPicker() }
+    }
+
+    @JavascriptInterface
+    fun listSkins(): String {
+        val arr = JSONArray()
+        GUPetSkinStore.list(activity).forEach { s ->
+            arr.put(JSONObject().put("id", s.id).put("name", s.name).put("author", s.author))
+        }
+        return arr.toString()
+    }
+
+    @JavascriptInterface
+    fun deleteSkin(id: String) {
+        if (GUPetSkinStore.delete(activity, id)) {
+            val prefs = petPrefs()
+            if (prefs.getString(PetPrefs.CUSTOM_SKIN_ID, null) == id) {
+                prefs.edit().remove(PetPrefs.CUSTOM_SKIN_ID).apply()
+            }
+        }
+    }
+
+    private fun needPetFirst(): Boolean {
+        if (petPrefs().getBoolean(PetPrefs.SHOW, false)) return false
+        activity.eval("window.GUPetUI.alert('Питомец выключен','Сначала включи питомца')")
+        return true
+    }
+
+    @JavascriptInterface
+    fun callPoop() {
+        if (needPetFirst()) return
+        activity.startForegroundService(
+            Intent(activity, OverlayPetService::class.java).setAction(GUPetContract.ACTION_POOP_NOW)
+        )
+    }
+
+    @JavascriptInterface
+    fun cleanPoops() {
+        if (needPetFirst()) return
+        activity.startForegroundService(
+            Intent(activity, OverlayPetService::class.java).setAction(GUPetContract.ACTION_CLEAN_POOPS)
+        )
+    }
+
+    @JavascriptInterface
+    fun selectSkin(id: String) {
+        // Применить скин: запомнить id + переключить вид на SKIN.
+        // Сервис подхватит через слушатель PetPrefs.
+        val clean = id.ifBlank { null }
+        PetPrefs.file(activity).edit()
+            .putString(PetPrefs.CUSTOM_SKIN_ID, clean)
+            .putString(PetPrefs.SPECIES, PetSpecies.SKIN.key)
+            .putString(PetPrefs.ACTIVE_SKIN, clean)
+            .apply()
+        if (clean != null) PetPrefs.saveActiveSkinIds(PetPrefs.file(activity), listOf(clean))
+    }
+
+    @JavascriptInterface
+    fun getActiveSkinIds(): String {
+        val prefs = PetPrefs.file(activity)
+        return org.json.JSONArray(PetPrefs.loadActiveSkinIds(prefs)).toString()
+    }
+
+    @JavascriptInterface
+    fun setActiveSkinIds(json: String) {
+        val prefs = PetPrefs.file(activity)
+        val valid = SkinStore.list(activity).map { it.id }.toSet()
+        val ids = runCatching {
+            val arr = org.json.JSONArray(json)
+            List(arr.length()) { i -> arr.optString(i, "").trim() }
+        }.getOrDefault(emptyList())
+            .filter { it.isNotBlank() && it in valid }.distinct()
+            .ifEmpty { listOf(SkinStore.BUILTIN_ID) }
+        PetPrefs.saveActiveSkinIds(prefs, ids)
+        // Legacy: вид/скин = первый выбранный; сервис мгновенно перерисует.
+        val first = ids.first()
+        val frames = if (first == SkinStore.BUILTIN_ID) false
+            else GUPetSkinStore.hasFrames(activity, first)
+        val e = prefs.edit()
+            .putString(
+                PetPrefs.SPECIES,
+                if (first == SkinStore.BUILTIN_ID || !frames) PetSpecies.GUPET.key
+                else PetSpecies.SKIN.key
             )
-        },
-    ) { innerPadding ->
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = innerPadding.calculateTopPadding() + 12.dp, bottom = 24.dp + WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()),
-            verticalArrangement = Arrangement.spacedBy(14.dp),
-        ) {
-            item {
-                Card(shape = RoundedCornerShape(28.dp), colors = CardDefaults.cardColors(containerColor = scheme.primaryContainer)) {
-                    Column(Modifier.fillMaxWidth().padding(22.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Text("GUPet", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold, color = scheme.onPrimaryContainer)
-                        Text("Небольшой пиксельный питомец, который живёт поверх приложений, гуляет, отдыхает и реагирует на происходящее.", style = MaterialTheme.typography.bodyLarge, color = scheme.onPrimaryContainer)
-                        Text("Версия ${BuildConfig.VERSION_NAME}", style = MaterialTheme.typography.labelLarge, color = scheme.onPrimaryContainer)
-                    }
-                }
-            }
-            item {
-                Card(shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = scheme.surfaceContainerLow)) {
-                    Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text("Команда", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-                        Text("GUPet развивается командой guteam.net. За разработку отвечает coder @frizovdanya.", style = MaterialTheme.typography.bodyMedium, color = scheme.onSurfaceVariant)
-                    }
-                }
-            }
-            item {
-                Card(shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = scheme.surfaceContainerLow)) {
-                    Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Text("Документация", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-                        Text("Инструкция по настройке питомца и созданию пользовательских скинов.", style = MaterialTheme.typography.bodyMedium, color = scheme.onSurfaceVariant)
-                        OutlinedButton(onClick = {
-                            runCatching { context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://doc.guteam.net/pet"))) }
-                        }) {
-                            Icon(Icons.Outlined.FileOpen, contentDescription = null)
-                            Spacer(Modifier.width(8.dp))
-                            Text("Открыть doc.guteam.net/pet")
-                        }
-                    }
-                }
-            }
-            item {
-                Column(Modifier.fillMaxWidth().padding(horizontal = 4.dp, vertical = 8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    Text("by guteam.net", style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.SemiBold)
-                    Text("coder @frizovdanya", style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.SemiBold)
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun HeroCard(
-    enabled: Boolean,
-    overlayGranted: Boolean,
-    species: PetSpecies,
-    palette: Int,
-    customSkin: GUPetSkin?,
-    onToggle: (Boolean) -> Unit,
-) {
-    val scheme = MaterialTheme.colorScheme
-    Card(
-        shape = RoundedCornerShape(30.dp),
-        colors = CardDefaults.cardColors(containerColor = scheme.primaryContainer),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-    ) {
-        Box(
-            Modifier.fillMaxWidth().background(
-                Brush.linearGradient(listOf(scheme.primaryContainer, scheme.tertiaryContainer)),
-                RoundedCornerShape(30.dp),
-            ).padding(20.dp),
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(7.dp)) {
-                    Text("Твой маленький\nпиксельный друг", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, color = scheme.onPrimaryContainer)
-                    Text("Живёт поверх приложений — гуляет, прыгает и реагирует на тебя.", style = MaterialTheme.typography.bodyMedium, color = scheme.onPrimaryContainer)
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Box(Modifier.size(9.dp).clip(CircleShape).background(if (enabled) Color(0xFF258A58) else scheme.outline))
-                        Spacer(Modifier.width(7.dp))
-                        Text(
-                            when {
-                                enabled && overlayGranted -> "Питомец на экране"
-                                !overlayGranted -> "Нужно разрешение Android"
-                                else -> "Питомец пока отдыхает"
-                            },
-                            style = MaterialTheme.typography.labelMedium,
-                            color = scheme.onPrimaryContainer,
-                        )
-                    }
-                    Spacer(Modifier.height(2.dp))
-                    FilledTonalButton(onClick = { onToggle(!enabled) }) {
-                        Icon(Icons.Outlined.Pets, contentDescription = null)
-                        Spacer(Modifier.width(8.dp))
-                        Text(if (enabled) "Спрятать питомца" else "Позвать питомца")
-                    }
-                }
-                Spacer(Modifier.width(6.dp))
-                PixelPetPreview(species, palette, Modifier.size(width = 112.dp, height = 110.dp), customSkin)
-            }
-        }
-    }
-}
-
-@Composable
-private fun SectionTitle(title: String, subtitle: String, icon: androidx.compose.ui.graphics.vector.ImageVector) {
-    val scheme = MaterialTheme.colorScheme
-    Row(Modifier.fillMaxWidth().padding(start = 4.dp, top = 3.dp), verticalAlignment = Alignment.CenterVertically) {
-        Box(Modifier.size(38.dp).clip(CircleShape).background(scheme.primaryContainer), contentAlignment = Alignment.Center) {
-            Icon(icon, contentDescription = null, tint = scheme.onPrimaryContainer, modifier = Modifier.size(20.dp))
-        }
-        Spacer(Modifier.width(11.dp))
-        Column {
-            Text(title, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-            Text(subtitle, style = MaterialTheme.typography.bodySmall, color = scheme.onSurfaceVariant)
-        }
-    }
-}
-
-@Composable
-private fun SpeciesCard(
-    species: PetSpecies,
-    selected: Boolean,
-    palette: Int,
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit,
-) {
-    val scheme = MaterialTheme.colorScheme
-    Card(
-        onClick = onClick,
-        modifier = modifier,
-        shape = RoundedCornerShape(22.dp),
-        colors = CardDefaults.cardColors(containerColor = if (selected) scheme.secondaryContainer else scheme.surfaceContainerLow),
-        border = if (selected) androidx.compose.foundation.BorderStroke(1.5.dp, scheme.primary) else null,
-    ) {
-        Column(
-            Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 12.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(5.dp),
-        ) {
-            PixelPetPreview(species, palette, Modifier.size(58.dp))
-            Text(species.title, style = MaterialTheme.typography.labelLarge, fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium)
-            if (selected) Text("Выбрано", style = MaterialTheme.typography.labelSmall, color = scheme.primary)
-            else Spacer(Modifier.height(14.dp))
-        }
-    }
-}
-
-@Composable
-private fun PaletteSwatch(color: Color, selected: Boolean, label: String, modifier: Modifier = Modifier, onClick: () -> Unit) {
-    Box(
-        modifier
-            .size(38.dp)
-            .clip(CircleShape)
-            .background(color)
-            .then(if (selected) Modifier.border(3.dp, MaterialTheme.colorScheme.onSurface, CircleShape) else Modifier)
-            .clickable(onClick = onClick),
-        contentAlignment = Alignment.Center,
-    ) {
-        if (selected) Text("✓", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 17.sp)
-    }
-}
-
-@Composable
-private fun SettingSwitchRow(
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
-    title: String,
-    subtitle: String,
-    checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit,
-) {
-    val scheme = MaterialTheme.colorScheme
-    Row(
-        Modifier.fillMaxWidth().toggleable(value = checked, role = Role.Switch, onValueChange = onCheckedChange).padding(horizontal = 16.dp, vertical = 12.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Icon(icon, contentDescription = null, tint = if (checked) scheme.primary else scheme.onSurfaceVariant, modifier = Modifier.size(22.dp))
-        Spacer(Modifier.width(13.dp))
-        Column(Modifier.weight(1f).padding(end = 8.dp)) {
-            Text(title, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Medium)
-            Text(subtitle, style = MaterialTheme.typography.bodySmall, color = scheme.onSurfaceVariant, maxLines = 2, overflow = TextOverflow.Ellipsis)
-        }
-        Switch(checked = checked, onCheckedChange = null)
-    }
-}
-
-@Composable
-private fun StatTile(title: String, value: String, emoji: String, modifier: Modifier = Modifier) {
-    val scheme = MaterialTheme.colorScheme
-    Row(
-        modifier.clip(RoundedCornerShape(17.dp)).background(scheme.surface).padding(horizontal = 12.dp, vertical = 10.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Text(emoji, fontSize = 19.sp)
-        Spacer(Modifier.width(8.dp))
-        Column {
-            Text(value, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-            Text(title, style = MaterialTheme.typography.labelSmall, color = scheme.onSurfaceVariant)
-        }
-    }
-}
-
-@Composable
-private fun PixelPetPreview(
-    species: PetSpecies,
-    palette: Int,
-    modifier: Modifier = Modifier,
-    customSkin: GUPetSkin? = null,
-) {
-    val pixelPaint = remember {
-        android.graphics.Paint().apply {
-            style = android.graphics.Paint.Style.FILL
-            isAntiAlias = false
-            isFilterBitmap = false
-        }
-    }
-    val previewFrame = remember(species, palette) {
-        PetFrame(expression = PetExpression.HAPPY, blush = true, phase = 0.4f)
-    }
-    Canvas(modifier) {
-        drawIntoCanvas { canvas ->
-            PetRenderer.draw(
-                canvas = canvas.nativeCanvas,
-                paint = pixelPaint,
-                width = size.width,
-                height = size.height,
-                species = species,
-                palette = palette,
-                frame = previewFrame,
-                nowMs = 0L,
-                particles = emptyList(),
-                customSkin = customSkin,
+            .putLong(PetPrefs.CUSTOM_SKIN_REVISION, System.currentTimeMillis())
+        if (frames) e.putString(PetPrefs.CUSTOM_SKIN_ID, first)
+        else e.remove(PetPrefs.CUSTOM_SKIN_ID)
+        e.apply()
+        runCatching {
+            activity.startService(
+                Intent(activity, OverlayPetService::class.java)
+                    .setAction(GUPetContract.ACTION_SETTINGS_CHANGED)
             )
         }
     }
-}
 
-private fun hasNotificationAccess(context: Context): Boolean {
-    val enabled = Secure.getString(context.contentResolver, "enabled_notification_listeners") ?: return false
-    return enabled.split(':').any { it.contains(context.packageName) }
-}
+    @JavascriptInterface
+    fun listFullSkins(): String {
+        // При первом запуске active не задан — считаем выбранным встроенный.
+        val prefs = PetPrefs.file(activity)
+        val ids = PetPrefs.loadActiveSkinIds(prefs)
+        val active = prefs.getString(PetPrefs.ACTIVE_SKIN, null) ?: ids.first()
+        val arr = JSONArray()
+        SkinStore.list(activity).forEach { s ->
+            arr.put(
+                JSONObject()
+                    .put("id", s.id)
+                    .put("name", s.name)
+                    .put("author", s.author)
+                    .put("builtin", s.builtin)
+                    .put("hasSettings", s.hasSettings)
+                    .put("hasFrames", s.hasFrames)
+            )
+        }
+        return JSONObject().put("active", active).put("activeIds", org.json.JSONArray(ids)).put("skins", arr).toString()
+    }
 
-private fun dispatchPetAction(context: Context, action: String, scope: CoroutineScope, snackbar: SnackbarHostState) {
-    try {
-        val intent = Intent(context, OverlayPetService::class.java).setAction(action)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) ContextCompat.startForegroundService(context, intent)
-        else context.startService(intent)
-    } catch (_: Exception) {
-        scope.launch { snackbar.showSnackbar("Не удалось запустить питомца. Проверь разрешения Android.") }
+    @JavascriptInterface
+    fun getSkin(id: String): String {
+        if (id == SkinStore.BUILTIN_ID) {
+            return JSONObject()
+                .put("id", id)
+                .put("name", "Стандартный GUPet")
+                .put("author", "GUTeam")
+                .put("builtin", true)
+                .put("hasFrames", false)
+                .put("settings", SkinStore.snapshotCurrent(activity))
+                .toString()
+        }
+        val info = GUPetSkinStore.list(activity).firstOrNull { it.id == id } ?: return "{}"
+        return JSONObject()
+            .put("id", info.id)
+            .put("name", info.name)
+            .put("author", info.author)
+            .put("builtin", false)
+            .put("hasFrames", GUPetSkinStore.hasFrames(activity, id))
+            .put("settings", GUPetSkinStore.readSettingsJson(activity, id) ?: JSONObject.NULL)
+            .toString()
+    }
+
+    @JavascriptInterface
+    fun createSkin(name: String, author: String): String {
+        return try {
+            val base = name.trim().lowercase()
+                .replace(Regex("[^a-z0-9]+"), "-")
+                .trim('-')
+                .take(30)
+                .ifBlank { "skin" }
+            var id = base
+            var n = 2
+            while (GUPetSkinStore.skinFolder(activity, id) != null) {
+                id = "$base-$n"
+                n++
+            }
+            val info = GUPetSkinStore.createSettingsSkin(
+                activity, id, name, author, SkinStore.snapshotCurrent(activity)
+            )
+            PetPrefs.file(activity).edit().putString(PetPrefs.ACTIVE_SKIN, info.id).apply()
+            val prefs = PetPrefs.file(activity)
+            val cur = PetPrefs.loadActiveSkinIds(prefs).toMutableList()
+            if (!cur.contains(info.id)) cur.add(info.id)
+            PetPrefs.saveActiveSkinIds(prefs, cur)
+            JSONObject().put("ok", true).put("id", info.id).toString()
+        } catch (e: Exception) {
+            JSONObject().put("ok", false).put("error", e.message ?: "").toString()
+        }
+    }
+
+    @JavascriptInterface
+    fun saveSkinMeta(id: String, name: String, author: String): Boolean {
+        if (id == SkinStore.BUILTIN_ID) return false
+        return GUPetSkinStore.writeMeta(activity, id, name, author)
+    }
+
+    @JavascriptInterface
+    fun snapshotSkin(id: String): Boolean {
+        // Снапшот только реплик: настройки живут в файле скина (per-instance),
+        // полный снапшот глобальных prefs сюда больше не пишется.
+        if (id == SkinStore.BUILTIN_ID) return false
+        return runCatching {
+            val current = GUPetSkinStore.readSettingsJson(activity, id) ?: JSONObject()
+            val arr = JSONArray()
+            PetPhrasesStore.load(activity).forEach { p ->
+                arr.put(
+                    JSONObject()
+                        .put("id", p.id)
+                        .put("text", p.text)
+                        .put("context", p.context)
+                        .put("weight", p.weight)
+                        .put("enabled", p.enabled)
+                )
+            }
+            current.put("phrases", arr)
+            GUPetSkinStore.writeSettingsJson(activity, id, current)
+        }.getOrDefault(false)
+    }
+
+    /** Настройки скина из .gupet (для редактора). builtin → снапшот текущих. */
+    @JavascriptInterface
+    fun getSkinSettings(id: String): String {
+        if (id == SkinStore.BUILTIN_ID) return SkinStore.snapshotCurrent(activity).toString()
+        return (GUPetSkinStore.readSettingsJson(activity, id) ?: JSONObject()).toString()
+    }
+
+    /** Записать настройки в файл скина (редактор). Сервис подхватит через listener. */
+    @JavascriptInterface
+    fun setSkinSettings(id: String, json: String): Boolean {
+        if (id == SkinStore.BUILTIN_ID) return false
+        val o = runCatching { JSONObject(json) }.getOrNull() ?: return false
+        val ok = GUPetSkinStore.writeSettingsJson(activity, id, o)
+        if (ok) {
+            PetPrefs.file(activity).edit()
+                .putLong(PetPrefs.CUSTOM_SKIN_REVISION, System.currentTimeMillis())
+                .apply()
+            runCatching {
+                activity.startService(
+                    Intent(activity, OverlayPetService::class.java)
+                        .setAction(GUPetContract.ACTION_SETTINGS_CHANGED)
+                )
+            }
+        }
+        return ok
+    }
+
+    @JavascriptInterface
+    fun deleteFullSkin(id: String): Boolean {
+        if (id == SkinStore.BUILTIN_ID) return false
+        val ok = GUPetSkinStore.delete(activity, id)
+        if (ok) {
+            val prefs = PetPrefs.file(activity)
+            if (prefs.getString(PetPrefs.CUSTOM_SKIN_ID, null) == id) {
+                prefs.edit().remove(PetPrefs.CUSTOM_SKIN_ID).apply()
+            }
+            if (prefs.getString(PetPrefs.ACTIVE_SKIN, null) == id) {
+                prefs.edit().remove(PetPrefs.ACTIVE_SKIN).apply()
+            }
+            val rest = PetPrefs.loadActiveSkinIds(prefs).filter { it != id }
+            PetPrefs.saveActiveSkinIds(prefs, rest)
+        }
+        return ok
+    }
+
+    @JavascriptInterface
+    fun applySkin(id: String): Boolean {
+        val ok = runCatching { SkinStore.applySkin(activity, id) }.getOrDefault(false)
+        if (ok) {
+            // Гарантированный сигнал смены скина: revision всегда меняется,
+            // listener перезагружает bitmap даже при PNG→PNG.
+            PetPrefs.file(activity).edit()
+                .putLong(PetPrefs.CUSTOM_SKIN_REVISION, System.currentTimeMillis())
+                .apply()
+            runCatching {
+                activity.startService(
+                    Intent(activity, OverlayPetService::class.java)
+                        .setAction(GUPetContract.ACTION_SETTINGS_CHANGED)
+                )
+            }
+        }
+        return ok
+    }
+
+    @JavascriptInterface
+    fun exportSkin(id: String) {
+        activity.runOnUiThread {
+            activity.pendingExportSkin(id)
+        }
+    }
+
+    @JavascriptInterface
+    fun getSkinPreviewUrl(id: String): String {
+        if (id == SkinStore.BUILTIN_ID) return ""
+        val folder = GUPetSkinStore.skinFolder(activity, id) ?: return ""
+        val idle = java.io.File(folder, "idle.png")
+        return if (idle.isFile) "file://" + idle.absolutePath else ""
+    }
+
+    @JavascriptInterface
+    fun mergeSkinFrames(id: String) {
+        activity.runOnUiThread {
+            activity.pendingFramesSkin(id)
+        }
+    }
+
+    @JavascriptInterface
+    fun getFrameInfo(skinId: String, frameName: String): String {
+        return GUPetSkinStore.frameInfo(activity, skinId, frameName).toString()
+    }
+
+    @JavascriptInterface
+    fun pickFrame(skinId: String, frameName: String) {
+        activity.runOnUiThread {
+            activity.launchFramePicker(skinId, frameName)
+        }
+    }
+
+    @JavascriptInterface
+    fun deleteFrame(skinId: String, frameName: String) {
+        activity.runOnUiThread {
+            GUPetSkinStore.deleteFramePng(activity, skinId, frameName)
+            PetPrefs.file(activity).edit()
+                .putLong(PetPrefs.CUSTOM_SKIN_REVISION, System.currentTimeMillis())
+                .apply()
+            activity.eval("window.onFrameDeleted && window.onFrameDeleted()")
+        }
+    }
+
+    @JavascriptInterface
+    fun duplicateSkin(skinId: String) {
+        activity.runOnUiThread {
+            val newId = SkinStore.duplicate(activity, skinId)
+            activity.eval("window.onSkinDuplicated && window.onSkinDuplicated('${newId ?: ""}')")
+        }
+    }
+
+    @JavascriptInterface
+    fun testPhrase(text: String) {        if (text.isBlank()) return
+        if (!PetPrefs.file(activity).getBoolean(PetPrefs.SHOW, false)) return
+        runCatching {
+            activity.sendBroadcast(
+                Intent(GUPetContract.ACTION_REACTION)
+                    .setPackage(activity.packageName)
+                    .putExtra(GUPetContract.EXTRA_MOOD, "say:$text")
+            )
+        }
+    }
+
+    @JavascriptInterface
+    fun hasNotificationAccess(): Boolean {
+        val enabled = Settings.Secure.getString(
+            activity.contentResolver, "enabled_notification_listeners"
+        ).orEmpty()
+        return enabled.split(":").any { it.contains(activity.packageName) }
+    }
+
+    @JavascriptInterface
+    fun requestNotificationAccess() {
+        activity.runOnUiThread {
+            runCatching { activity.startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)) }
+        }
     }
 }
-
-private val PALETTE_COLORS = listOf(
-    Color(0xFFD97757), Color(0xFF4FBF98), Color(0xFF9B8AEE), Color(0xFF4FA8E8), Color(0xFFEE85AE), Color(0xFF5E6670),
-)

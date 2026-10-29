@@ -1,4 +1,4 @@
-package com.frizovdanya.pixpet
+package net.guteam.gupet
 
 import android.app.Notification
 import android.service.notification.NotificationListenerService

@@ -11,3 +11,16 @@ local.properties
 *.iml
 .DS_Store
 Thumbs.db
+
+# Build outputs and local artifacts
+**/target/
+**/gen/schemas/
+**/node_modules/
+*.zip
+*.tar.xz
+*.log
+linux_BACKUP_*/
+output_skins/
+windows/СОБРАНО/
+Вставленное изображение.png
+package_error.log

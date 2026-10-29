@@ -1,0 +1,18 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "GUPet settings and overlay windows",
+  "windows": [
+    "settings",
+    "overlay"
+  ],
+  "permissions": [
+    "core:default",
+    "core:event:default",
+    "core:window:allow-cursor-position",
+    "core:window:allow-set-ignore-cursor-events",
+    "core:window:allow-outer-position",
+    "core:window:allow-scale-factor",
+    "core:window:allow-inner-size"
+  ]
+}

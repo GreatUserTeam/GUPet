@@ -1,4 +1,4 @@
-package com.frizovdanya.pixpet
+package net.guteam.gupet
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,6 +6,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
 import android.view.View
+import kotlin.collections.ArrayDeque
 import kotlin.math.abs
 import kotlin.math.min
 import kotlin.math.sin
@@ -16,7 +17,8 @@ private const val GRID_H = 13
 enum class PetSpecies(val key: String, val title: String) {
     GUPET("gupet", "GUPet"),
     CAT("cat", "Кошка"),
-    DOG("dog", "Собака");
+    DOG("dog", "Собака"),
+    SKIN("skin", "Скин");
 
     companion object {
         fun fromKey(key: String?): PetSpecies = entries.firstOrNull { it.key == key } ?: GUPET
@@ -52,7 +54,6 @@ internal object PetPalettes {
     fun outline(index: Int) = outline[index.coerceIn(outline.indices)]
     fun highlight(index: Int) = highlight[index.coerceIn(highlight.indices)]
     fun blush(index: Int): Int = blend(body(index), 0xFFFF6F91.toInt(), 0.58f)
-
     private fun blend(a: Int, b: Int, amount: Float): Int {
         val t = amount.coerceIn(0f, 1f)
         val r = (((a shr 16) and 255) + (((b shr 16) and 255) - ((a shr 16) and 255)) * t).toInt()
@@ -62,8 +63,70 @@ internal object PetPalettes {
     }
 }
 
-internal enum class PetPose { IDLE, WALK, PRESS, DRAG, FLY, PET, SLEEP, HANG, PEEK, STRETCH, YAWN, GROOM, SPIN, DANCE }
-internal enum class PetExpression { OPEN, BLINK, HAPPY, SURPRISED, DIZZY, ANGRY, SLEEP, LOVE }
+/** Палитра питомца одним объектом. customPalette в draw = произвольный цвет из пикера. */
+internal data class PetPalette(
+    val body: Int,
+    val eye: Int,
+    val shade: Int,
+    val outline: Int,
+    val highlight: Int,
+    val blush: Int,
+)
+
+internal fun petPaletteFromIndex(index: Int): PetPalette = PetPalette(
+    body = PetPalettes.body(index),
+    eye = PetPalettes.eye(index),
+    shade = PetPalettes.shade(index),
+    outline = PetPalettes.outline(index),
+    highlight = PetPalettes.highlight(index),
+    blush = PetPalettes.blush(index),
+)
+
+private fun scaleChannel(color: Int, factor: Float): PetPaletteTriple {
+    val r = (((color shr 16) and 255) * factor).toInt().coerceIn(0, 255)
+    val g = (((color shr 8) and 255) * factor).toInt().coerceIn(0, 255)
+    val b = ((color and 255) * factor).toInt().coerceIn(0, 255)
+    return PetPaletteTriple(r, g, b)
+}
+
+private data class PetPaletteTriple(val r: Int, val g: Int, val b: Int)
+
+private fun mixColors(a: Int, b: Int, amount: Float): Int {
+    val t = amount.coerceIn(0f, 1f)
+    val r = (((a shr 16) and 255) + (((b shr 16) and 255) - ((a shr 16) and 255)) * t).toInt().coerceIn(0, 255)
+    val g = (((a shr 8) and 255) + (((b shr 8) and 255) - ((a shr 8) and 255)) * t).toInt().coerceIn(0, 255)
+    val bl = ((a and 255) + ((b and 255) - (a and 255)) * t).toInt().coerceIn(0, 255)
+    return (0xFF shl 24) or (r shl 16) or (g shl 8) or bl
+}
+
+private fun luminance01(color: Int): Float =
+    (0.299f * ((color shr 16) and 255) + 0.587f * ((color shr 8) and 255) + 0.114f * (color and 255)) / 255f
+
+/**
+ * Строит палитру из произвольного hex (#RRGGBB / #AARRGGBB):
+ * body = hex, тени/контур — затемнение, блик — осветление,
+ * румянец — та же смесь с розовым, что и у встроенных (0.58),
+ * глаза — тёмные на светлом теле, светлые на тёмном.
+ * Возвращает null, если hex не парсится (тогда используется индекс).
+ */
+internal fun petPaletteFromColor(hex: String): PetPalette? {
+    val parsed = runCatching { android.graphics.Color.parseColor(hex) }.getOrNull() ?: return null
+    val body = (0xFF shl 24) or (parsed and 0x00FFFFFF)
+    val sh = scaleChannel(body, 0.8f)
+    val ol = scaleChannel(body, 0.55f)
+    val shade = (0xFF shl 24) or (sh.r shl 16) or (sh.g shl 8) or sh.b
+    val outline = (0xFF shl 24) or (ol.r shl 16) or (ol.g shl 8) or ol.b
+    return PetPalette(
+        body = body,
+        eye = if (luminance01(body) > 0.55f) 0xFF37221E.toInt() else 0xFFF4F1E8.toInt(),
+        shade = shade,
+        outline = outline,
+        highlight = mixColors(body, 0xFFFFFFFF.toInt(), 0.45f),
+        blush = mixColors(body, 0xFFFF6F91.toInt(), 0.58f),
+    )
+}
+
+internal enum class PetPose { IDLE, WALK, PRESS, DRAG, FLY, PET, SLEEP, HANG, PEEK, STRETCH, YAWN, GROOM, SPIN, DANCE }internal enum class PetExpression { OPEN, BLINK, HAPPY, SURPRISED, DIZZY, ANGRY, SLEEP, LOVE }
 internal enum class ParticleKind { HEART, SPARK, ZZZ, NOTE, STAR }
 
 internal data class PetFrame(
@@ -93,6 +156,8 @@ class PetArtView(context: Context) : View(context) {
         set(value) { field = value; invalidate() }
     internal var paletteIndex: Int = 0
         set(value) { field = value.coerceIn(0, PetPalettes.names.lastIndex); invalidate() }
+    internal var customPalette: PetPalette? = null
+        set(value) { field = value; invalidate() }
     internal var customSkin: GUPetSkin? = null
         set(value) { field = value; invalidate() }
     internal var frame: PetFrame = PetFrame()
@@ -116,7 +181,7 @@ class PetArtView(context: Context) : View(context) {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        PetRenderer.draw(canvas, pixelPaint, width.toFloat(), height.toFloat(), species, paletteIndex, frame, frameTimeMs, particles, customSkin)
+        PetRenderer.draw(canvas, pixelPaint, width.toFloat(), height.toFloat(), species, paletteIndex, frame, frameTimeMs, particles, customSkin, customPalette)
     }
 }
 
@@ -150,6 +215,7 @@ internal object PetRenderer {
         nowMs: Long,
         particles: List<PetParticle>,
         customSkin: GUPetSkin? = null,
+        customPalette: PetPalette? = null,
     ) {
         if (width <= 0f || height <= 0f) return
         val unit = min(width / GRID_W, height / (GRID_H + 2f))
@@ -188,12 +254,13 @@ internal object PetRenderer {
             return
         }
 
-        val body = PetPalettes.body(palette)
-        val eye = PetPalettes.eye(palette)
-        val shade = PetPalettes.shade(palette)
-        val outline = PetPalettes.outline(palette)
-        val highlight = PetPalettes.highlight(palette)
-        val blush = PetPalettes.blush(palette)
+        val pal = customPalette ?: petPaletteFromIndex(palette)
+        val body = pal.body
+        val eye = pal.eye
+        val shade = pal.shade
+        val outline = pal.outline
+        val highlight = pal.highlight
+        val blush = pal.blush
         val alternate = (frame.phase * if (species == PetSpecies.DOG) 13f else 5f).toInt() and 1
         val tailLift = when {
             species == PetSpecies.CAT -> if (alternate == 0) 0 else 1
@@ -223,7 +290,7 @@ internal object PetRenderer {
                 px(canvas, paint, 13, 3, 3, 4, shade, unit, topPad)
                 px(canvas, paint, 3, 4, 1, 2, highlight, unit, topPad)
             }
-            PetSpecies.GUPET -> Unit
+            PetSpecies.GUPET, PetSpecies.SKIN -> Unit
         }
         paint.color = 0x55352520
         canvas.drawRect(unit * 4f, topPad + unit * 12.5f, unit * 14f, topPad + unit * 13f, paint)
@@ -283,7 +350,7 @@ internal object PetRenderer {
                 px(canvas, paint, 7, 8, 2, 1, outline, unit, topPad)
                 if (frame.mouthOpen || frame.pose == PetPose.YAWN) px(canvas, paint, 8, 8, 1, 1, 0xFFEA6688.toInt(), unit, topPad)
             }
-            PetSpecies.GUPET -> {
+            PetSpecies.GUPET, PetSpecies.SKIN -> {
                 if (frame.mouthOpen || frame.pose == PetPose.YAWN) {
                     px(canvas, paint, 8, 7, 2, 2, outline, unit, topPad)
                     px(canvas, paint, 8, 8, 2, 1, 0xFFEA6688.toInt(), unit, topPad)
@@ -438,6 +505,10 @@ internal object PetRenderer {
 class PoopArtView(context: Context, private val onClean: () -> Unit) : View(context) {
     private val paint = Paint().apply { style = Paint.Style.FILL; isAntiAlias = false }
 
+    /** Цвет кучки из настроек; глаза (w/k) не перекрашиваются. */
+    var poopColorHex: String = "#8b5a2b"
+        set(value) { field = value; invalidate() }
+
     companion object {
         private val pattern = arrayOf(
             "....X....", "...XXo...", "..XXXXX..", ".XXXXXXo.",
@@ -458,11 +529,14 @@ class PoopArtView(context: Context, private val onClean: () -> Unit) : View(cont
         val cell = min(width / 9f, height / 7f)
         val ox = (width - cell * 9f) / 2f
         val oy = (height - cell * 7f) / 2f
+        val base = runCatching { android.graphics.Color.parseColor(poopColorHex) }.getOrNull() ?: 0xFF8A5A33.toInt()
+        val baseOpaque = (0xFF shl 24) or (base and 0x00FFFFFF)
+        val light = mixColors(baseOpaque, 0xFFFFFFFF.toInt(), 0.35f)
         for (row in pattern.indices) {
             for (col in pattern[row].indices) {
                 val color = when (pattern[row][col]) {
-                    'X' -> 0xFF8A5A33.toInt()
-                    'o' -> 0xFFB27D4E.toInt()
+                    'X' -> baseOpaque
+                    'o' -> light
                     'w' -> 0xFFFFFFFF.toInt()
                     'k' -> 0xFF1A1A1A.toInt()
                     else -> 0

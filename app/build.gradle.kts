@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.frizovdanya.pixpet"
+    namespace = "net.guteam.gupet"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.frizovdanya.pixpet"
+        applicationId = "net.guteam.gupet"
         minSdk = 23
         targetSdk = 35
         versionCode = 3

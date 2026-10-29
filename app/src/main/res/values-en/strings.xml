@@ -1,0 +1,160 @@
+<resources>
+    <string name="app_name">GUPet — pixel pet</string>
+    <string name="app_subtitle">Pixel pet</string>
+    <string name="notification_title">GUPet is active</string>
+    <string name="notification_text">Your pet is shown on top of other apps</string>
+    <string name="notification_stop">Stop</string>
+
+    <!-- Main screen -->
+    <string name="brand_prefix">U</string>
+    <string name="brand_highlight">Pet</string>
+    <string name="main_settings_button">Settings</string>
+    <string name="main_hint">Your pet walks on top of other apps, rests and reacts to you.</string>
+    <string name="status_active">Pet is on screen</string>
+    <string name="status_inactive">Pet is resting for now</string>
+    <string name="status_permission">Android permission needed</string>
+    <string name="toggle_on">Turn off</string>
+    <string name="toggle_off">Turn on</string>
+    <string name="overlay_title">Permission needed</string>
+    <string name="overlay_desc">Android will ask you to allow GUPet to show on top of other apps.</string>
+    <string name="overlay_action">Allow</string>
+
+    <!-- Settings screen -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_close">Close</string>
+
+    <!-- Sections -->
+    <string name="section_settings_params">Settings parameters</string>
+    <string name="section_pet">Pet</string>
+    <string name="section_behavior">Behavior</string>
+    <string name="section_poop">Poops</string>
+    <string name="section_sleep">Sleep</string>
+    <string name="section_additional">More</string>
+
+    <!-- Settings parameters -->
+    <string name="label_settings_theme">Settings window theme</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_light">Light</string>
+    <string name="label_settings_accent">Settings accent</string>
+    <string name="label_scroll_mode">Position on open</string>
+    <string name="scroll_remember">Same place</string>
+    <string name="scroll_top">Top</string>
+    <string name="label_lang">Interface language</string>
+    <string name="lang_auto">Auto</string>
+    <string name="lang_ru">RU</string>
+    <string name="lang_en">EN</string>
+    <string name="label_ask_delete">Ask before deleting</string>
+    <string name="label_use_theme_font">Use theme font</string>
+    <string name="opt_yes">Yes</string>
+    <string name="opt_no">No</string>
+    <string name="label_section_title_size">Section header size</string>
+    <string name="unit_px">%1$d px</string>
+
+    <!-- Pet -->
+    <string name="pet_subtitle">GUPet pal, cat or dog</string>
+    <string name="skins_title">Custom skins</string>
+    <string name="skins_subtitle">A skin replaces the look and colors; pet animations are kept.</string>
+    <string name="skin_builtin">Built-in look</string>
+    <string name="skins_import">Import .gupet</string>
+    <string name="skins_hint">PNG frames 18 × 13 px · archives up to 2 MB</string>
+    <string name="skins_empty">No skins added yet. Format and sample archive — in the docs.</string>
+    <string name="skin_author">Author: %1$s</string>
+    <string name="skin_selected">Selected</string>
+    <string name="skin_delete_title">Delete skin?</string>
+    <string name="skin_delete_message">“%1$s” will be removed from the device.</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_ok">OK</string>
+    <string name="label_species">Pet species</string>
+    <string name="label_color">Color</string>
+    <string name="palette_locked">Saved built-in look color: %1$s</string>
+    <string name="label_size">Size</string>
+    <string name="size_small">Small</string>
+    <string name="size_big">Big</string>
+    <string name="unit_dp">%1$d dp</string>
+    <string name="snack_skin_imported">Skin “%1$s” imported and selected</string>
+    <string name="snack_skin_import_failed">Could not import the skin</string>
+
+    <!-- Behavior -->
+    <string name="behavior_subtitle">Your pet lives its own little life</string>
+    <string name="behavior_wander_title">Wanders alone</string>
+    <string name="behavior_wander_desc">Walks, jumps, waves and sometimes peeks from the edge</string>
+    <string name="behavior_phrases_title">Speech bubbles</string>
+    <string name="behavior_phrases_desc">Short bubbles while playing</string>
+    <string name="behavior_gravity_title">Gravity and tilt</string>
+    <string name="behavior_gravity_desc">Falls down and slides when you tilt the phone</string>
+    <string name="behavior_shake_title">Reacts to shaking</string>
+    <string name="behavior_shake_desc">Shake the phone — your pet will tumble</string>
+    <string name="behavior_haptics_title">Haptic feedback</string>
+    <string name="behavior_haptics_desc">Gentle vibration on touch</string>
+    <string name="behavior_dance_title">Dances to music</string>
+    <string name="behavior_dance_desc">Reacts to active media players and changes dance moves</string>
+    <string name="behavior_dance_desc_locked">Allow media session access in the block below — no audio is recorded</string>
+    <string name="behavior_notif_title">Reactions to Telegram</string>
+    <string name="behavior_notif_desc">Recognizes greetings, laughter and hearts in notifications</string>
+    <string name="notif_access_title">Access for music and notifications</string>
+    <string name="notif_access_desc">Needed to detect music playback and reactions to Telegram notifications. Text is checked locally and never stored.</string>
+    <string name="notif_access_action">Configure</string>
+    <string name="snack_overlay_denied">Permission to draw over other apps was not granted</string>
+    <string name="snack_notif_denied">Notification access is not enabled</string>
+    <string name="snack_dance_denied">Without media session access your pet cannot detect music</string>
+
+    <!-- Poops -->
+    <string name="poop_subtitle">Trigger any time and clean up with one tap</string>
+    <string name="poop_title">Independent poops</string>
+    <string name="poop_desc">Random events can be disabled. Manual trigger is always available.</string>
+    <string name="poop_now">Poop now</string>
+    <string name="poop_clean">Clean poops</string>
+    <string name="snack_enable_first">Turn on your pet first</string>
+
+    <!-- Sleep -->
+    <string name="sleep_title">When to fall asleep</string>
+    <string name="sleep_never">Never</string>
+    <string name="sleep_min">%1$d min</string>
+    <string name="sleep_desc_never">Never falls asleep alone</string>
+    <string name="sleep_desc_after">After %1$d min. of inactivity</string>
+
+    <!-- More -->
+    <string name="additional_subtitle">Quick actions and stats</string>
+    <string name="action_recenter">Recenter</string>
+    <string name="action_hide">Hide</string>
+    <string name="action_call">Call</string>
+    <string name="stat_pets">Pets</string>
+    <string name="stat_poops">Poops cleaned</string>
+    <string name="resources_gupet">GUPet resources</string>
+    <string name="link_github">GitHub</string>
+    <string name="link_web">Web version</string>
+    <string name="link_project">Project page</string>
+
+    <!-- About our team -->
+    <string name="section_about_team">About our team</string>
+    <string name="about_team_subtitle">Who we are</string>
+    <string name="about_team_text">We are programmers, designers and other IT specialists working for the common good of our team. Together we create popular digital products you want to use every day.</string>
+    <string name="about_team_more">More about Great User Team</string>
+    <string name="about_features_title">Our team makes software for all kinds of devices that meets these requirements:</string>
+    <string name="feature_custom_name">Customization</string>
+    <string name="feature_custom_desc">Users choose the interface they like, not the one a corporation decided to make.</string>
+    <string name="feature_optim_name">Optimization</string>
+    <string name="feature_optim_desc">Flawless performance, no lags or delays.</string>
+    <string name="feature_freedom_name">Freedom</string>
+    <string name="feature_freedom_desc">No tracking or data collection. All our products are absolutely free and open source.</string>
+    <string name="about_all_products">All GUT products</string>
+    <string name="gut_resources">GUTeam resources:</string>
+    <string name="link_site">Website</string>
+    <string name="link_tg_channel">TG channel</string>
+    <string name="link_tg_forum">TG forum</string>
+    <string name="about_version">Version %1$s</string>
+
+    <!-- Internal -->
+    <string name="snack_start_failed">Could not start your pet. Check Android permissions.</string>
+    <string name="confirm_default_title">Confirm action</string>
+    <string name="confirm_default_message">This action cannot be undone.</string>
+    <string name="color_picker_title">Pick a color</string>
+    <string name="color_picker_hue">Hue</string>
+    <string name="color_picker_sat">Saturation</string>
+    <string name="color_picker_val">Brightness</string>
+    <string name="color_picker_alpha">Opacity</string>
+    <string name="color_picker_hex">HEX</string>
+    <string name="color_picker_invalid">Invalid HEX code</string>
+    <string name="action_apply">Apply</string>
+</resources>
