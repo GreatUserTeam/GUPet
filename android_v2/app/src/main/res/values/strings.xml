@@ -1,0 +1,160 @@
+<resources>
+    <string name="app_name">GUPet</string>
+    <string name="app_subtitle">Пиксельный питомец</string>
+    <string name="notification_title">GUPet активен</string>
+    <string name="notification_text">Питомец отображается поверх приложений</string>
+    <string name="notification_stop">Остановить</string>
+
+    <!-- Главный экран -->
+    <string name="brand_prefix">U</string>
+    <string name="brand_highlight">Pet</string>
+    <string name="main_settings_button">Настроить</string>
+    <string name="main_hint">Питомец гуляет поверх других приложений, отдыхает и реагирует на тебя.</string>
+    <string name="status_active">Питомец на экране</string>
+    <string name="status_inactive">Питомец пока отдыхает</string>
+    <string name="status_permission">Нужно разрешение Android</string>
+    <string name="toggle_on">Выключить</string>
+    <string name="toggle_off">Включить</string>
+    <string name="overlay_title">Нужно разрешение</string>
+    <string name="overlay_desc">Android попросит разрешить GUPet показываться поверх других приложений.</string>
+    <string name="overlay_action">Разрешить</string>
+
+    <!-- Экран настроек -->
+    <string name="settings_title">Настройки</string>
+    <string name="settings_close">Закрыть</string>
+
+    <!-- Секции -->
+    <string name="section_settings_params">Параметры настроек</string>
+    <string name="section_pet">Питомец</string>
+    <string name="section_behavior">Поведение</string>
+    <string name="section_poop">Кучки</string>
+    <string name="section_sleep">Сон</string>
+    <string name="section_additional">Дополнительно</string>
+
+    <!-- Параметры настроек -->
+    <string name="label_settings_theme">Тема окна настроек</string>
+    <string name="theme_dark">Тёмная</string>
+    <string name="theme_light">Светлая</string>
+    <string name="label_settings_accent">Акцент настроек</string>
+    <string name="label_scroll_mode">Позиция при открытии</string>
+    <string name="scroll_remember">В то же место</string>
+    <string name="scroll_top">В начало</string>
+    <string name="label_lang">Язык интерфейса</string>
+    <string name="lang_auto">Auto</string>
+    <string name="lang_ru">RU</string>
+    <string name="lang_en">EN</string>
+    <string name="label_ask_delete">Спрашивать перед удалением</string>
+    <string name="label_use_theme_font">Шрифт из темы</string>
+    <string name="opt_yes">Да</string>
+    <string name="opt_no">Нет</string>
+    <string name="label_section_title_size">Размер заголовков в разделах</string>
+    <string name="unit_px">%1$d px</string>
+
+    <!-- Питомец -->
+    <string name="pet_subtitle">Питомец GUPet, кошка или собака</string>
+    <string name="skins_title">Пользовательские скины</string>
+    <string name="skins_subtitle">Скин заменяет вид и окрас; анимации питомца сохраняются.</string>
+    <string name="skin_builtin">Встроенный вид</string>
+    <string name="skins_import">Импорт .gupet</string>
+    <string name="skins_hint">PNG-кадры 18 × 13 px · архивы размером до 2 МБ</string>
+    <string name="skins_empty">Пока нет добавленных скинов. Формат и пример архива — в документации.</string>
+    <string name="skin_author">Автор: %1$s</string>
+    <string name="skin_selected">Выбрано</string>
+    <string name="skin_delete_title">Удалить скин?</string>
+    <string name="skin_delete_message">«%1$s» будет удалён с устройства.</string>
+    <string name="action_delete">Удалить</string>
+    <string name="action_cancel">Отмена</string>
+    <string name="action_ok">ОК</string>
+    <string name="label_species">Вид питомца</string>
+    <string name="label_color">Окрас</string>
+    <string name="palette_locked">Сохранённый окрас встроенного вида: %1$s</string>
+    <string name="label_size">Размер</string>
+    <string name="size_small">Маленький</string>
+    <string name="size_big">Большой</string>
+    <string name="unit_dp">%1$d dp</string>
+    <string name="snack_skin_imported">Скин «%1$s» импортирован и выбран</string>
+    <string name="snack_skin_import_failed">Не удалось импортировать скин</string>
+
+    <!-- Поведение -->
+    <string name="behavior_subtitle">Питомец живёт своей маленькой жизнью</string>
+    <string name="behavior_wander_title">Гуляет сам</string>
+    <string name="behavior_wander_desc">Ходит, прыгает, машет и иногда выглядывает из-за края</string>
+    <string name="behavior_phrases_title">Реплики</string>
+    <string name="behavior_phrases_desc">Короткие облачка во время игры</string>
+    <string name="behavior_gravity_title">Гравитация и наклон</string>
+    <string name="behavior_gravity_desc">Падает вниз и скользит, если наклонить телефон</string>
+    <string name="behavior_shake_title">Реагирует на встряхивание</string>
+    <string name="behavior_shake_desc">Потряси телефон — питомец кувыркнётся</string>
+    <string name="behavior_haptics_title">Тактильный отклик</string>
+    <string name="behavior_haptics_desc">Лёгкая вибрация при касаниях</string>
+    <string name="behavior_dance_title">Танцует под музыку</string>
+    <string name="behavior_dance_desc">Реагирует на активные медиаплееры и меняет танцевальные движения</string>
+    <string name="behavior_dance_desc_locked">Разреши доступ к медиасессиям в блоке ниже — звук не записывается</string>
+    <string name="behavior_notif_title">Реакции на Telegram</string>
+    <string name="behavior_notif_desc">Распознаёт приветствия, смех и сердечки в уведомлениях</string>
+    <string name="notif_access_title">Доступ для музыки и уведомлений</string>
+    <string name="notif_access_desc">Нужен для определения воспроизведения музыки и реакций на Telegram-уведомления. Текст проверяется локально и не сохраняется.</string>
+    <string name="notif_access_action">Настроить</string>
+    <string name="snack_overlay_denied">Разрешение на отображение поверх приложений не выдано</string>
+    <string name="snack_notif_denied">Доступ к уведомлениям не включён</string>
+    <string name="snack_dance_denied">Без доступа к медиасессиям питомец не сможет определить музыку</string>
+
+    <!-- Кучки -->
+    <string name="poop_subtitle">Можно вызвать в любой момент и убрать одним касанием</string>
+    <string name="poop_title">Самостоятельные кучки</string>
+    <string name="poop_desc">Можно отключить случайные события. Ручной вызов доступен в любой момент.</string>
+    <string name="poop_now">Покакать сейчас</string>
+    <string name="poop_clean">Убрать кучки</string>
+    <string name="snack_enable_first">Сначала включи питомца</string>
+
+    <!-- Сон -->
+    <string name="sleep_title">Когда засыпать</string>
+    <string name="sleep_never">Никогда</string>
+    <string name="sleep_min">%1$d мин</string>
+    <string name="sleep_desc_never">Не засыпает сам</string>
+    <string name="sleep_desc_after">После %1$d мин. бездействия</string>
+
+    <!-- Дополнительно -->
+    <string name="additional_subtitle">Быстрые действия и статистика</string>
+    <string name="action_recenter">В центр</string>
+    <string name="action_hide">Спрятать</string>
+    <string name="action_call">Позвать</string>
+    <string name="stat_pets">Погладили</string>
+    <string name="stat_poops">Убрано кучек</string>
+    <string name="resources_gupet">Ресурсы GUPet</string>
+    <string name="link_github">GitHub</string>
+    <string name="link_web">Интернет-версия</string>
+    <string name="link_project">Страница проекта</string>
+
+    <!-- О нашей команде -->
+    <string name="section_about_team">О нашей команде</string>
+    <string name="about_team_subtitle">Кто мы такие</string>
+    <string name="about_team_text">Мы — программисты, дизайнеры и другие IT-специалисты, работающие на общее благо нашей команды. Вместе мы создаём востребованные цифровые продукты, которыми хочется пользоваться каждый день.</string>
+    <string name="about_team_more">Подробнее о Great User Team</string>
+    <string name="about_features_title">Наша команда делает такой софт для всех видов устройств, который соответствует требованиям:</string>
+    <string name="feature_custom_name">Кастомизация</string>
+    <string name="feature_custom_desc">Пользователь сам выбирает тот интерфейс, который ему по душе, а не тот, который решила сделать корпорация.</string>
+    <string name="feature_optim_name">Оптимизация</string>
+    <string name="feature_optim_desc">Безупречная работа, без лагов и задержек.</string>
+    <string name="feature_freedom_name">Свобода</string>
+    <string name="feature_freedom_desc">Никакой слежки и сбора данных. Все наши продукты абсолютно бесплатны и с открытым кодом.</string>
+    <string name="about_all_products">Все продукты GUT</string>
+    <string name="gut_resources">Ресурсы GUTeam:</string>
+    <string name="link_site">Сайт</string>
+    <string name="link_tg_channel">TG-канал</string>
+    <string name="link_tg_forum">TG-форум</string>
+    <string name="about_version">Версия %1$s</string>
+
+    <!-- Служебное -->
+    <string name="snack_start_failed">Не удалось запустить питомца. Проверь разрешения Android.</string>
+    <string name="confirm_default_title">Подтвердите действие</string>
+    <string name="confirm_default_message">Это действие нельзя отменить.</string>
+    <string name="color_picker_title">Выбор цвета</string>
+    <string name="color_picker_hue">Оттенок</string>
+    <string name="color_picker_sat">Насыщенность</string>
+    <string name="color_picker_val">Яркость</string>
+    <string name="color_picker_alpha">Прозрачность</string>
+    <string name="color_picker_hex">HEX</string>
+    <string name="color_picker_invalid">Неверный HEX-код</string>
+    <string name="action_apply">Применить</string>
+</resources>

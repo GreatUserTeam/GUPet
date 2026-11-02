@@ -6,9 +6,6 @@
   <meta name="theme-color" content="#0b0b0b" id="themeColorMeta">
   <title>GUPet</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23ff4d30' stop-opacity='0.9'/%3E%3Cstop offset='100%25' stop-color='%23ff4d30' stop-opacity='0'/%3E%3C/radialGradient%3E%3CclipPath id='c'%3E%3Ccircle cx='32' cy='32' r='28'/%3E%3C/clipPath%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='32' fill='url(%23g)'/%3E%3Ccircle cx='32' cy='32' r='28' fill='%230b0b0b' stroke='%23ff4d30' stroke-width='2'/%3E%3Cg clip-path='url(%23c)' transform='translate(32 32) scale(2.4) translate(-287 -152)'%3E%3Cpath fill='%23ff4d30' fill-rule='evenodd' d='M295.83978,162.01341c-1.14354,-0.58272 -5.60379,-2.32213 -7.07813,-3.09326c-2.14031,-1.11944 -2.74713,-1.12821 -10.07719,-4.65303c-10.19549,-4.90058 -11.86041,-3.21156 -7.18547,-6.41873c3.18089,-2.17974 3.45472,-2.43824 4.86553,-4.60046c1.66274,-2.54778 1.77446,-2.83476 2.79971,-7.17452c0.31546,-1.33851 1.48748,-1.14573 6.39244,1.04277c2.75151,1.22898 3.25537,1.72408 4.83486,4.74723c1.37795,2.64198 2.99687,4.74723 4.28281,6.97079c1.19612,2.06801 4.82829,7.59513 6.07698,9.24473c3.92134,5.18537 2.53244,7.73096 -4.91153,3.93448z'/%3E%3C/g%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.googleapis.com"> 
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --accent: #ff4d30;
@@ -118,20 +115,34 @@
     }
     body.light {
       --bg: #ffffff;
-      --fg: #222222;
+      --fg: #111111;
       --title-color: #000000;
-      --fg-muted: rgba(0, 0, 0, 0.6);
-      --fg-faint: rgba(0, 0, 0, 0.4);
-      --panel-bg: rgba(246, 245, 244, 0.5);
+      --brand-color: #000000;
+      --fg-muted: rgba(0, 0, 0, 0.7);
+      --fg-faint: rgba(0, 0, 0, 0.5);
+      --panel-bg: rgba(246, 245, 244, 0.85);
       --panel-solid-color: #f6f5f4;
-      --topbar-bg: rgba(246, 245, 244, 0.5);
-      --card-bg: rgba(0, 0, 0, 0.04);
-      --card-hover: rgba(0, 0, 0, 0.07);
-      --border-soft: rgba(0, 0, 0, 0.1);
-      --border-mid: rgba(0, 0, 0, 0.2);
-      --segment-bg: rgba(0, 0, 0, 0.05);
-      --segment-fg: rgba(0, 0, 0, 0.55);
-      --svg-white: #141414;
+      --topbar-bg: rgba(246, 245, 244, 0.85);
+      --card-bg: rgba(0, 0, 0, 0.05);
+      --card-hover: rgba(0, 0, 0, 0.08);
+      --border-soft: rgba(0, 0, 0, 0.12);
+      --border-mid: rgba(0, 0, 0, 0.22);
+      --segment-bg: rgba(0, 0, 0, 0.06);
+      --segment-fg: rgba(0, 0, 0, 0.6);
+      --svg-white: #000000;
+      --status-text-color: #111111;
+      --status-dot-inactive-color: rgba(0, 0, 0, 0.28);
+      --hint-text-color: #222222;
+      --hint-text-opacity: 0.9;
+      --settings-button-color: #111111;
+      --settings-button-border-color: rgba(0, 0, 0, 0.18);
+      --panel-border-color: rgba(0, 0, 0, 0.12);
+      --panel-custom-bg: rgba(255, 255, 255, 0.9);
+      --toggle-off-text-color: #222222;
+      --toggle-track-color-off: rgba(0, 0, 0, 0.14);
+      --toggle-thumb-color-off: #ffffff;
+      --toggle-track-border-color-off: rgba(0, 0, 0, 0.25);
+      --toggle-thumb-border-color-off: rgba(0, 0, 0, 0.2);
     }
     .settings-theme-dark {
       --set-bg: #0b0b0b;
@@ -150,18 +161,96 @@
     }
     .settings-theme-light {
       --set-bg: #ffffff;
-      --set-fg: #222222;
+      --set-fg: #111111;
       --set-title: #000000;
-      --set-fg-muted: rgba(0, 0, 0, 0.6);
-      --set-fg-faint: rgba(0, 0, 0, 0.4);
-      --set-topbar-bg: rgba(246, 245, 244, 0.85);
+      --set-fg-muted: rgba(0, 0, 0, 0.7);
+      --set-fg-faint: rgba(0, 0, 0, 0.5);
+      --set-topbar-bg: rgba(246, 245, 244, 0.95);
       --set-card-bg: rgba(0, 0, 0, 0.04);
       --set-card-hover: rgba(0, 0, 0, 0.07);
-      --set-border-soft: rgba(0, 0, 0, 0.1);
-      --set-border-mid: rgba(0, 0, 0, 0.2);
-      --set-segment-bg: rgba(0, 0, 0, 0.05);
-      --set-segment-fg: rgba(0, 0, 0, 0.55);
+      --set-border-soft: rgba(0, 0, 0, 0.12);
+      --set-border-mid: rgba(0, 0, 0, 0.22);
+      --set-segment-bg: rgba(0, 0, 0, 0.06);
+      --set-segment-fg: rgba(0, 0, 0, 0.6);
       --set-accent: #ff4d30;
+    }
+    /* Белая тема: гарантированное переключение всех элементов и надписей на черный цвет и обеспечение контраста */
+    body.light .brand-text {
+      color: #000000 !important;
+    }
+    body.light .brand-text #brandTitleU,
+    body.light .brand-text .brand-g-letter,
+    body.light .brand-text .brand-custom-title {
+      color: #000000 !important;
+    }
+    body.light .header-g-icon .svg-body {
+      fill: #000000 !important;
+    }
+    body.light .status-line,
+    body.light #statusText {
+      color: #111111 !important;
+    }
+    body.light .hint,
+    body.light #hintText {
+      color: #222222 !important;
+      opacity: 0.9 !important;
+    }
+    body.light .panel {
+      background: rgba(246, 245, 244, 0.85);
+      border: 1px solid rgba(0, 0, 0, 0.12) !important;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06) !important;
+    }
+    body.light .settings-open-btn {
+      color: #111111 !important;
+      background: rgba(0, 0, 0, 0.05);
+      outline-color: rgba(0, 0, 0, 0.18) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+    body.light .settings-open-btn svg {
+      stroke: #111111 !important;
+    }
+    body.light .settings-open-btn:hover {
+      color: var(--accent) !important;
+      background: color-mix(in srgb, var(--accent) 15%, transparent);
+      outline-color: var(--accent) !important;
+    }
+    body.light .settings-open-btn:hover svg {
+      stroke: var(--accent) !important;
+    }
+    body.light .perm-row {
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.1) !important;
+      color: #111111 !important;
+    }
+    body.light .perm-row .perm-name {
+      color: #111111 !important;
+    }
+    body.light .pets-warning {
+      color: #c62828 !important;
+      background: rgba(198, 40, 40, 0.1) !important;
+      border: 1px solid rgba(198, 40, 40, 0.3) !important;
+    }
+    body.light .dev-link-btn.secondary {
+      color: #111111 !important;
+      border-color: rgba(0, 0, 0, 0.22) !important;
+      background: rgba(0, 0, 0, 0.04);
+    }
+    body.light .dev-link-btn.secondary:hover {
+      background: rgba(0, 0, 0, 0.08);
+      border-color: rgba(0, 0, 0, 0.35) !important;
+    }
+    body.light .timer-display.inactive {
+      color: rgba(0, 0, 0, 0.5) !important;
+    }
+    body.light .big-btn.off {
+      color: #111111;
+    }
+    body.light .big-btn.control-switch:not(.off)::before {
+      background: #ffffff;
+    }
+    body.light .big-btn.control-switch.off::before {
+      background: #ffffff;
+      border-color: rgba(0, 0, 0, 0.2);
     }
     body.no-anim *, body.no-anim *::before, body.no-anim *::after {
       animation-duration: 0s !important;
@@ -570,8 +659,6 @@
       align-items: center;
       justify-content: space-between;
       background: var(--set-topbar-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--set-border-soft);
     }
     .settings-title {
@@ -600,6 +687,198 @@
       stroke: currentColor; fill: none;
       stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
     }
+    .settings-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .settings-pc-btn {
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid var(--set-border-mid);
+      background: var(--set-card-bg);
+      color: var(--set-fg);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background calc(0.2s * var(--anim-speed-factor)), color calc(0.2s * var(--anim-speed-factor));
+    }
+    .settings-pc-btn:hover { background: var(--set-accent); color: #fff; border-color: var(--set-accent); }
+    .pc-hidden { display: none !important; }
+    .pc-conditional {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      min-width: 0;
+    }
+    .pc-conditional > .settings-row {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 10px;
+      min-width: 0;
+    }
+    .pc-conditional > .settings-row > .settings-label {
+      flex: 0 0 auto;
+      min-width: 0;
+    }
+    .pc-conditional > .settings-row > .segmented {
+      display: flex;
+      width: 100%;
+      max-width: 100%;
+      margin-left: 0;
+      box-sizing: border-box;
+    }
+    .pc-conditional > .settings-row > .segmented button {
+      flex: 1 1 0;
+      min-width: 0;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    .pc-hint {
+      margin-top: 8px;
+      color: var(--set-fg-faint);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .pc-apps-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+      min-height: 30px;
+    }
+    .pc-app-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--set-card-bg);
+      border: 1px solid var(--set-border-mid);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .pc-app-chip button {
+      width: 20px;
+      height: 20px;
+      border: none;
+      border-radius: 50%;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      font: inherit;
+      line-height: 1;
+    }
+    .pc-app-chip button:hover { background: var(--set-accent); color: #fff; }
+    .pc-app-add { display: flex; gap: 8px; align-items: center; }
+    .pc-app-add input {
+      flex: 1;
+      min-width: 0;
+      background: var(--set-card-bg);
+      border: 1px solid var(--set-border-mid);
+      color: var(--set-fg);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font: inherit;
+      font-size: 13px;
+      outline: none;
+    }
+    .pc-app-add input:focus { border-color: var(--set-accent); }
+    .pc-app-add button {
+      min-height: 40px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: 1px solid var(--set-border-mid);
+      background: var(--set-card-bg);
+      color: var(--set-fg);
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .pc-app-add button:hover { background: var(--set-accent); color: #fff; }
+    #skinPcSettingsOverlay .settings-header {
+      background: transparent;
+      border-bottom-color: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    .pc-frame-row {
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .pc-frame-row .frame-name {
+      flex: 1 1 190px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .pc-frame-file {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--set-fg);
+    }
+    .pc-frame-row .frame-status { flex: 1 1 80px; }
+    .pc-frame-toggle { flex: 0 0 auto; }
+    .pc-frame-toggle button { padding: 5px 10px; font-size: 11px; }
+    .pc-apps-toolbar {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .pc-scan-btn {
+      min-height: 38px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid var(--set-border-mid);
+      background: var(--set-card-bg);
+      color: var(--set-fg);
+      font: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .pc-scan-btn:hover { background: var(--set-accent); border-color: var(--set-accent); color: #fff; }
+    .pc-scan-btn:disabled { opacity: 0.5; cursor: default; }
+    .pc-scan-status { font-size: 12px; color: var(--set-fg-faint); }
+    .pc-scan-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin: 4px 0;
+    }
+    .pc-app-check {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: var(--set-card-bg);
+      border: 1px solid var(--set-border-soft);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .pc-app-check:hover { border-color: var(--set-border-mid); }
+    .pc-app-check input {
+      width: 16px;
+      height: 16px;
+      margin: 0;
+      accent-color: var(--set-accent);
+      cursor: pointer;
+    }
+    .pc-app-check span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .pc-selected-title { margin-top: 6px; }
     .settings-body {
       max-width: 720px;
       width: 100%;
@@ -932,9 +1211,7 @@
       inset: 0;
       z-index: 0;
       border-radius: inherit;
-      background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      background: rgba(0, 0, 0, 0.58);
       transition: background calc(0.2s * var(--anim-speed-factor));
       pointer-events: none;
     }
@@ -1121,8 +1398,6 @@
       padding: 16px 24px 24px;
       border-top: 1px solid var(--set-border-soft);
       background: var(--set-topbar-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
     }
     @media (max-width: 640px) {
       .theme-editor-overlay .te-actions { justify-content: center; }
@@ -1424,7 +1699,20 @@
       display: inline-flex; align-items: center; gap: 8px;
       padding: 10px 20px; border-radius: 9999px; font-size: 13px; font-weight: 700; text-decoration: none; font-family: inherit;
     }
-    .dev-link-btn.primary { background: var(--set-accent); color: #fff; }
+    .dev-link-btn.primary {
+      background: linear-gradient(135deg, #ff8a4c 0%, #ff5a2b 48%, var(--set-accent) 100%);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 6px 18px rgba(255, 77, 48, 0.3);
+      cursor: pointer;
+      transition: transform calc(0.2s * var(--anim-speed-factor)), box-shadow calc(0.2s * var(--anim-speed-factor)), filter calc(0.2s * var(--anim-speed-factor));
+    }
+    .dev-link-btn.primary:hover {
+      filter: brightness(1.08) saturate(1.05);
+      box-shadow: 0 10px 26px rgba(255, 77, 48, 0.44);
+      transform: translateY(-2px);
+    }
+    .dev-link-btn.primary:active { transform: translateY(0) scale(0.98); box-shadow: 0 4px 12px rgba(255, 77, 48, 0.34); }
     .dev-link-btn.secondary { background: transparent; color: var(--set-fg); border: 1px solid var(--set-border-mid); }
     .dev-link-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
     /* Магазин тем: без карточки/рамки/фона — только текст и кнопка на фоне страницы */
@@ -1446,6 +1734,158 @@
       transition: filter calc(0.2s * var(--anim-speed-factor)), transform calc(0.2s * var(--anim-speed-factor));
     }
     .themes-store-btn:hover { filter: brightness(1.1); transform: scale(1.03); }
+    /* ---- Магазин скинов (GitHub Releases) ---- */
+    .skins-store-launch {
+      margin-top: 6px;
+      padding-top: 18px;
+      border-top: 1px solid var(--set-border-soft);
+    }
+    .skins-market {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .skins-market-status { min-height: 18px; font-size: 13px; line-height: 1.5; color: var(--set-fg-muted); }
+    .skins-market-status.error { color: #ff6b5a; font-weight: 600; }
+    .skins-market-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 16px;
+    }
+    .market-card {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      padding: 14px;
+      border: 1px solid var(--set-border-mid);
+      border-radius: 16px;
+      background: var(--set-card-bg);
+      gap: 8px;
+    }
+    .market-preview {
+      width: 100%;
+      height: 126px;
+      border-radius: 12px;
+      background: rgba(127, 127, 127, 0.09);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex: 0 0 auto;
+    }
+    .market-preview-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .market-preview-empty {
+      width: 38px;
+      height: 38px;
+      color: var(--set-fg-faint);
+      opacity: 0.75;
+    }
+    .market-name {
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.3;
+      color: var(--set-fg);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .market-meta {
+      font-size: 12px;
+      color: var(--set-fg-faint);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .market-desc {
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--set-fg-muted);
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 54px;
+    }
+    .market-actions {
+      display: flex;
+      align-items: stretch;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 4px;
+    }
+    .market-download-btn {
+      flex: 1 1 auto;
+      min-width: 0;
+      padding: 9px 12px;
+      border-radius: 9999px;
+      border: 1px solid var(--set-border-mid);
+      background: transparent;
+      color: var(--set-fg);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background calc(0.2s * var(--anim-speed-factor)), color calc(0.2s * var(--anim-speed-factor)), border-color calc(0.2s * var(--anim-speed-factor));
+    }
+    .market-download-btn:hover:not(:disabled) { background: var(--set-accent); color: #fff; border-color: var(--set-accent); }
+    .market-download-btn:disabled { opacity: 0.65; cursor: default; }
+    .market-download-btn.delete {
+      border-color: rgba(255, 107, 90, 0.6);
+      color: #ff6b5a;
+    }
+    .market-download-btn.delete:hover:not(:disabled) { background: #ff6b5a; border-color: #ff6b5a; color: #fff; }
+    .market-github-btn {
+      flex: 0 0 40px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      border: 1px solid var(--set-border-mid);
+      background: var(--set-segment-bg);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--set-fg);
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset;
+      transition: background calc(0.2s * var(--anim-speed-factor)), color calc(0.2s * var(--anim-speed-factor)), border-color calc(0.2s * var(--anim-speed-factor)), transform calc(0.2s * var(--anim-speed-factor)), box-shadow calc(0.2s * var(--anim-speed-factor));
+    }
+    .market-github-btn:hover {
+      background: var(--set-accent);
+      color: #fff;
+      border-color: var(--set-accent);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px color-mix(in srgb, var(--set-accent) 38%, transparent);
+    }
+    .market-github-btn:active { transform: translateY(0) scale(0.96); }
+    .market-github-btn:focus-visible { outline: 2px solid var(--set-accent); outline-offset: 2px; }
+    .market-github-btn svg { width: 19px; height: 19px; fill: currentColor; }
+    .skins-store-btn { flex: 0 0 auto; align-self: center; }
+    .skins-store-btn svg { width: 16px; height: 16px; }
+    .market-reload-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .market-reload-btn svg {
+      width: 16px;
+      height: 16px;
+      margin-right: 7px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
     /* На узком экране кнопка уходит под текст и центрируется */
     @container (max-width: 560px) {
       .themes-store-row { flex-direction: column; align-items: stretch; }
@@ -1539,8 +1979,6 @@
       align-items: center;
       justify-content: space-between;
       background: var(--set-topbar-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--set-border-soft);
     }
     .cp-title {
@@ -1723,9 +2161,7 @@
       position: fixed;
       inset: 0;
       z-index: 4000;
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+      background: rgba(0,0,0,0.55);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -2185,20 +2621,7 @@
       <span class="status-dot" id="statusDot"></span>
       <span id="statusText">Питомец пока отдыхает</span>
     </div>
-    <div class="perm-block" id="permBlock">
-      <div class="perm-row" data-perm="overlay">
-        <span class="perm-name">Показ поверх других приложений</span>
-        <button type="button" class="perm-btn">Разрешить</button>
-      </div>
-      <div class="perm-row" data-perm="notifications">
-        <span class="perm-name">Доступ к уведомлениям</span>
-        <button type="button" class="perm-btn">Разрешить</button>
-      </div>
-      <div class="perm-row" data-perm="post_notifications">
-        <span class="perm-name">Уведомления</span>
-        <button type="button" class="perm-btn">Разрешить</button>
-      </div>
-    </div>
+    <div class="perm-block" id="permBlock" style="display:none"></div>
     
     <button class="big-btn display-icon off" id="toggleBtn" aria-label="Включить">
       <svg class="toggle-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v10"></path><path d="M5.6 5.6a9 9 0 1 0 12.8 0"></path></svg>
@@ -2255,6 +2678,14 @@
             <button data-lang="en" data-value="en" id="langEnBtn">EN</button>
           </div>
         </div>
+        <div class="settings-row">
+          <div class="settings-label" id="labelAutostart">Запускать при старте системы</div>
+          <div class="segmented" id="autostartSegmented" data-pref-key="autostart">
+            <div class="thumb"></div>
+            <button data-value="off" class="active">Выкл</button>
+            <button data-value="on">Вкл</button>
+          </div>
+        </div>
         
         
         
@@ -2292,9 +2723,14 @@
           <div class="bg-gallery" id="skinsGallery"></div>
           <input type="file" id="skinFileInput" accept=".gupet" style="display:none;">
         </div>
-        <div class="themes-store-row" style="margin-top:12px;">
-          <div class="themes-store-text">Вы можете загрузить больше скинов из нашего магазина или создать их сами</div>
-          <a href="https://store.guteam.net/pet" target="_blank" rel="noopener noreferrer" class="themes-store-btn" id="skinsStoreBtn">Перейти в магазин</a>
+        <div class="skins-store-launch themes-store">
+          <div class="themes-store-row">
+            <div class="themes-store-text">Скины из GitHub-репозитория GreatUserTeam/petckins</div>
+            <button type="button" class="dev-link-btn primary skins-store-btn" id="skinsStoreBtn">
+              <span>Открыть магазин</span>
+              <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+          </div>
         </div>
         <div class="dev-links" style="margin-top:8px;display:none;">
           <button type="button" class="dev-link-btn secondary" id="createSkinBtn">Создать скин</button>
@@ -2432,9 +2868,12 @@
   <div class="settings-overlay settings-theme-dark" id="skinEditorOverlay">
     <div class="settings-header">
       <div class="settings-title"><span id="skinEditorTitle">Скин</span></div>
-      <button class="settings-close-btn" id="closeSkinEditorBtn" aria-label="Закрыть">
-        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
+      <div class="settings-header-actions">
+        <button class="settings-pc-btn" id="openSkinPcSettingsBtn" type="button">Настройки для ПК</button>
+        <button class="settings-close-btn" id="closeSkinEditorBtn" aria-label="Закрыть">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
     </div>
     <div class="settings-body">
       <div class="settings-section">
@@ -2467,7 +2906,7 @@
         <div class="settings-row">
           <div class="settings-label">Размер</div>
           <div class="range-container">
-            <input type="range" min="1" max="15" step="0.5" value="4" class="range-input" id="skinSizeDp" data-pet-field="sizeDp">
+            <input type="range" min="1" max="10" step="0.5" value="4" class="range-input" id="skinSizeDp" data-pet-field="sizeDp">
             <span class="range-val" id="skinSizeDpVal">4</span>
           </div>
         </div>
@@ -2497,7 +2936,7 @@
             <button data-value="false" class="active">Выкл</button>
           </div>
         </div>
-        <div class="settings-row">
+        <div class="settings-row pc-hidden">
           <div class="settings-label">Реакция на тряску</div>
           <div class="segmented" data-pet-field="shake">
             <div class="thumb"></div>
@@ -2519,7 +2958,7 @@
             <span class="range-val" id="skinSlideFrictionVal">1</span>
           </div>
         </div>
-        <div class="settings-row">
+        <div class="settings-row pc-hidden">
           <div class="settings-label">Вибрация</div>
           <div class="segmented" data-pet-field="haptics">
             <div class="thumb"></div>
@@ -2527,7 +2966,7 @@
             <button data-value="false">Выкл</button>
           </div>
         </div>
-        <div class="settings-row">
+        <div class="settings-row pc-hidden">
           <div class="settings-label">Вибрация у краёв</div>
           <div class="segmented" data-pet-field="edgeVibration">
             <div class="thumb"></div>
@@ -2551,7 +2990,7 @@
             <button data-value="false">Выкл</button>
           </div>
         </div>
-        <div class="settings-row">
+        <div class="settings-row pc-hidden">
           <div class="settings-label">Реакция на уведомления</div>
           <div class="segmented" data-pet-field="reactNotifications">
             <div class="thumb"></div>
@@ -2741,6 +3180,126 @@
       </div>
     </div>
   </div>
+  <div class="settings-overlay settings-theme-dark" id="skinPcSettingsOverlay">
+    <div class="settings-header">
+      <div class="settings-title"><span>Настройки для ПК</span></div>
+      <div class="settings-header-actions">
+        <button class="settings-close-btn" id="closeSkinPcSettingsXBtn" aria-label="Закрыть">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+    <div class="settings-body">
+      <div class="settings-section">
+        <div class="settings-section-title">Дополнительные PNG-кадры</div>
+        <div class="settings-row">
+          <div class="settings-label">Включить дополнительные кадры</div>
+          <div class="segmented" data-pc-field="extendedFrames">
+            <div class="thumb"></div>
+            <button data-value="true">Вкл</button>
+            <button data-value="false" class="active">Выкл</button>
+          </div>
+        </div>
+        <div id="pcFramesList"></div>
+        <div class="pc-hint">Кадры для ПК хранятся прямо в manifest.json. Android-версия игнорирует этот раздел и открывает скин как обычно.</div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-title">Курсор</div>
+        <div class="settings-row">
+          <div class="settings-label">Реакция на курсор</div>
+          <div class="segmented" data-pc-field="cursorReaction">
+            <div class="thumb"></div>
+            <button data-value="none" class="active">Нет</button>
+            <button data-value="chase">Догонять</button>
+            <button data-value="flee">Убегать</button>
+          </div>
+        </div>
+        <div class="settings-row">
+          <div class="settings-label">Обнаружение курсора</div>
+          <div class="segmented" data-pc-field="cursorDetection">
+            <div class="thumb"></div>
+            <button data-value="everywhere" class="active">Везде</button>
+            <button data-value="distance">На расстоянии</button>
+          </div>
+        </div>
+        <div class="settings-row pc-hidden" id="pcDistanceRow">
+          <div class="settings-label">Расстояние обнаружения</div>
+          <div class="range-container">
+            <input type="range" min="1" max="10" step="1" value="5" class="range-input" id="pcCursorDistance" data-pc-field="cursorDistance">
+            <span class="range-val" id="pcCursorDistanceVal">5</span>
+          </div>
+        </div>
+        <div class="settings-row">
+          <div class="settings-label">Скорость передвижения</div>
+          <div class="range-container">
+            <input type="range" min="1" max="100" step="1" value="50" class="range-input" id="pcCursorSpeed" data-pc-field="cursorSpeed">
+            <span class="range-val" id="pcCursorSpeedVal">50</span>
+          </div>
+        </div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-title">Приложения</div>
+        <div class="settings-row">
+          <div class="settings-label">Прятаться, когда приложение в фокусе</div>
+          <div class="segmented" data-pc-field="hideOnAppOpen">
+            <div class="thumb"></div>
+            <button data-value="true">Вкл</button>
+            <button data-value="false" class="active">Выкл</button>
+          </div>
+        </div>
+        <div id="pcHideSettings" class="pc-conditional pc-hidden">
+          <div class="settings-row">
+            <div class="settings-label">Когда прятать</div>
+            <div class="segmented" data-pc-field="hideMode">
+              <div class="thumb"></div>
+              <button data-value="all" class="active">При всех</button>
+              <button data-value="selected">При выбранных</button>
+            </div>
+          </div>
+          <div id="pcHideSelectedBox" class="pc-conditional pc-hidden">
+            <div class="settings-row">
+              <div class="settings-label">Список приложений</div>
+              <div class="segmented" data-pc-field="hideFilter">
+                <div class="thumb"></div>
+                <button data-value="except">Всех, кроме:</button>
+                <button data-value="only" class="active">Только выбранных:</button>
+              </div>
+            </div>
+            <div class="pc-apps-toolbar">
+              <button type="button" class="pc-scan-btn" id="pcScanAppsBtn">Обновить список</button>
+              <span class="pc-scan-status" id="pcScanAppsStatus">Список ещё не обновлён</span>
+            </div>
+            <div class="pc-apps-list pc-scan-list" id="pcScannedAppsList"></div>
+            <div class="settings-section-title pc-selected-title">Выбранные приложения</div>
+            <div class="pc-apps-list" id="pcHideAppsList"></div>
+          </div>
+        </div>
+        <div class="pc-hint">Список открытых приложений строится по X11 _NET_CLIENT_LIST. «Всех, кроме» скрывает питомца при любом окне, кроме отмеченных, «Только выбранных» — только при отмеченных.</div>
+      </div>
+    </div>
+  </div>
+  <div class="settings-overlay settings-theme-dark" id="skinMarketOverlay">
+    <div class="settings-header">
+      <div class="settings-title"><span>Магазин скинов</span></div>
+      <div class="settings-header-actions">
+        <button class="settings-pc-btn market-reload-btn" id="skinsMarketRefresh" type="button" title="Обновить">
+          <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+          <span>Обновить</span>
+        </button>
+        <button class="settings-close-btn" id="closeSkinMarketBtn" aria-label="Закрыть">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+    <div class="settings-body">
+      <div class="settings-section">
+        <div class="skins-market">
+          <div class="skins-market-status" id="skinsMarketStatus">Загрузка…</div>
+          <div class="skins-market-grid" id="skinsMarketGrid"></div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="confirm-overlay settings-theme-dark" id="skinCreateOverlay">
     <div class="confirm-box skin-create-box">
       <div class="confirm-title" id="skinCreateTitle">Создание скина</div>
@@ -2810,6 +3369,7 @@
       </div>
     </div>
   </div>
+  <script src="bridge.js"></script>
   <script>
     (function() {
       'use strict';
@@ -2864,6 +3424,21 @@
         'Скины': 'Skins',
         'Вы можете загрузить больше скинов из нашего магазина или создать их сами': 'You can get more skins from our store or create your own',
         'Перейти в магазин': 'Open store',
+        'Открыть магазин': 'Open store',
+        'Магазин скинов': 'Skin store',
+        'Скины из GitHub-репозитория GreatUserTeam/petckins': 'Skins from the GreatUserTeam/petckins GitHub repository',
+        'Обновить': 'Refresh',
+        'Загрузка…': 'Loading…',
+        'Не удалось загрузить магазин': 'Could not load the store',
+        'В магазине пока нет скинов': 'No skins in the store yet',
+        'Скачать': 'Download',
+        'Скачивание…': 'Downloading…',
+        'Установлено': 'Installed',
+        'Удаление…': 'Deleting…',
+        'Скин удалён': 'Skin deleted',
+        'Не удалось удалить скин': 'Could not delete the skin',
+        'Скин добавлен в галерею': 'Skin added to the gallery',
+        'Не удалось скачать скин': 'Could not download the skin',
         'Загрузить скин': 'Upload skin',
         'Создать скин': 'Create skin',
         '+ Создать скин': '+ Create skin',
@@ -2897,6 +3472,7 @@
         'Удаление': 'Deletion',
         'Спрашивать перед удалением реплики': 'Ask before deleting a phrase',
         'Вкл': 'On',
+        'Запускать при старте системы': 'Start with the system',
         'Выкл': 'Off',
         'Сохранить': 'Save',
         'Скин': 'Skin',
@@ -3036,6 +3612,9 @@
           if (typeof editorFolder !== 'undefined' && editorFolder) renderPhrasesList();
           else renderFolders();
         }
+        // Карточки магазина содержат динамический текст — перерисовываем их
+        // на выбранном языке (названия и описания в релизах двуязычные).
+        if (typeof renderSkinMarket === 'function') renderSkinMarket();
       }
 
       /* ---------- confirm / alert ---------- */
@@ -3079,6 +3658,7 @@
         settingsOverlay.classList.add('active');
       });
       on($('closeSettingsBtn'), 'click', function() {
+        $('skinMarketOverlay').classList.remove('active');
         settingsOverlay.classList.remove('active');
       });
 
@@ -3199,6 +3779,379 @@
         else pushPetSettings();
       }
 
+      /* ---------- настройки скина для ПК ---------- */
+      var PC_DEFAULTS = {
+        extendedFrames: false,
+        cursorTouch: false,
+        cursorNear: false,
+        cursorFar: false,
+        appOpen: false,
+        hideOnAppOpen: false,
+        hideMode: 'all',
+        hideFilter: 'only',
+        hideApps: [],
+        cursorReaction: 'none',
+        cursorDetection: 'everywhere',
+        cursorDistance: 5,
+        cursorSpeed: 50,
+        extraFrames: {}
+      };
+      var PC_FRAMES = [
+        { key: 'cursor_hover', field: 'cursorTouch', label: 'Кадр при касании курсора' },
+        { key: 'cursor_near', field: 'cursorNear', label: 'Кадр, когда курсор рядом' },
+        { key: 'cursor_far', field: 'cursorFar', label: 'Кадр, когда курсор далеко' },
+        { key: 'app_open', field: 'appOpen', label: 'Кадр, когда открыто приложение' }
+      ];
+      var pcDraft = null;
+      var pcScannedApps = [];
+      var pcSaveTimer = null;
+      var pcDirty = false;
+      function defaultPcSettings() {
+        return JSON.parse(JSON.stringify(PC_DEFAULTS));
+      }
+      function clampPcRange(value, fallback, max) {
+        var number = Math.round(Number(value));
+        if (!Number.isFinite(number)) number = fallback;
+        return Math.max(1, Math.min(max, number));
+      }
+      function normalizePcSettings(src) {
+        var value = src && typeof src === 'object' ? src : {};
+        var apps = Array.isArray(value.hideApps) ? value.hideApps.map(function (item) {
+          return String(item || '').trim().toLowerCase();
+        }).filter(function (item) {
+          return item.length > 0 && item.length <= 120;
+        }).slice(0, 64) : [];
+        var uniqueApps = Array.from(new Set(apps));
+        var hideMode = value.hideMode === 'selected' || value.hideMode === 'all'
+          ? value.hideMode
+          : (uniqueApps.length ? 'selected' : 'all');
+        var hideFilter = value.hideFilter === 'except' ? 'except' : 'only';
+        return {
+          extendedFrames: !!value.extendedFrames,
+          cursorTouch: !!value.cursorTouch,
+          cursorNear: !!value.cursorNear,
+          cursorFar: !!value.cursorFar,
+          appOpen: !!value.appOpen,
+          hideOnAppOpen: !!value.hideOnAppOpen,
+          hideMode: hideMode,
+          hideFilter: hideFilter,
+          hideApps: uniqueApps,
+          cursorReaction: value.cursorReaction === 'chase' || value.cursorReaction === 'flee' ? value.cursorReaction : 'none',
+          cursorDetection: value.cursorDetection === 'distance' ? 'distance' : 'everywhere',
+          cursorDistance: clampPcRange(value.cursorDistance, 5, 10),
+          cursorSpeed: clampPcRange(value.cursorSpeed, 50, 100),
+          extraFrames: value.extraFrames && typeof value.extraFrames === 'object' ? value.extraFrames : {}
+        };
+      }
+      function setPcField(field, raw) {
+        if (!pcDraft) return;
+        if (field === 'cursorDistance') {
+          pcDraft[field] = clampPcRange(raw, 5, 10);
+        } else if (field === 'cursorSpeed') {
+          pcDraft[field] = clampPcRange(raw, 50, 100);
+        } else if (field === 'hideApps') {
+          pcDraft[field] = Array.isArray(raw) ? raw.slice() : [];
+        } else if (field === 'cursorReaction' || field === 'cursorDetection' || field === 'hideMode' || field === 'hideFilter') {
+          pcDraft[field] = String(raw || '');
+        } else {
+          pcDraft[field] = raw === true || raw === 'true' || raw === 'on';
+        }
+        pcDirty = true;
+        if (field === 'extendedFrames') renderPcFramesList();
+        if (field === 'hideOnAppOpen' || field === 'hideMode' || field === 'hideFilter') {
+          updatePcVisibility();
+          renderPcApps();
+        }
+        if (field === 'cursorDetection') updatePcVisibility();
+        if (field === 'cursorDistance') {
+          var distanceVal = $('pcCursorDistanceVal');
+          if (distanceVal) distanceVal.textContent = String(pcDraft.cursorDistance);
+        }
+        if (field === 'cursorSpeed') {
+          var speedVal = $('pcCursorSpeedVal');
+          if (speedVal) speedVal.textContent = String(pcDraft.cursorSpeed);
+        }
+        schedulePcSave();
+      }
+      function syncPcExtraFrames() {
+        if (!pcDraft || !editingSkinId || editingSkinId === 'builtin') return;
+        try {
+          var fresh = normalizePcSettings(JSON.parse(PB.getPcSettings(editingSkinId)));
+          pcDraft.extraFrames = fresh.extraFrames || {};
+        } catch (e) {}
+      }
+      function reloadPcDraft() {
+        if (!pcDraft || !editingSkinId || editingSkinId === 'builtin' || !bridge()) return;
+        try {
+          pcDraft = normalizePcSettings(JSON.parse(PB.getPcSettings(editingSkinId)));
+          pcDirty = false;
+        } catch (e) {}
+      }
+      function bindPcFrameToggle(seg, field) {
+        seg.querySelectorAll('button').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            seg.querySelectorAll('button').forEach(function (item) { item.classList.remove('active'); });
+            btn.classList.add('active');
+            moveThumb(seg, btn);
+            setPcField(field, btn.dataset.value);
+          });
+        });
+        var active = seg.querySelector('button.active');
+        if (active) requestAnimationFrame(function () { moveThumb(seg, active); });
+      }
+      function renderPcFramesList() {
+        var box = $('pcFramesList');
+        if (!box) return;
+        box.innerHTML = '';
+        if (!pcDraft || !editingSkinId || !pcDraft.extendedFrames) return;
+        PC_FRAMES.forEach(function (frame) {
+          var info = frameInfoOf(frame.key);
+          var row = document.createElement('div');
+          row.className = 'frame-row pc-frame-row';
+          row.dataset.frame = frame.key;
+          var nm = document.createElement('div');
+          nm.className = 'frame-name';
+          var nmFile = document.createElement('span');
+          nmFile.className = 'pc-frame-file';
+          nmFile.textContent = frame.key + '.png';
+          nm.appendChild(nmFile);
+          var st = document.createElement('div');
+          st.className = 'frame-status' + (info.exists ? ' loaded' : '');
+          st.textContent = info.exists ? T('загружен') : T('— не загружен —');
+          var toggle = document.createElement('div');
+          toggle.className = 'segmented pc-frame-toggle';
+          toggle.innerHTML = '<div class="thumb"></div><button data-value="true">Вкл</button><button data-value="false">Выкл</button>';
+          setSegValue(toggle, pcDraft[frame.field] ? 'true' : 'false');
+          bindPcFrameToggle(toggle, frame.field);
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'frame-upload-btn';
+          btn.textContent = info.exists ? T('Заменить') : T('Загрузить');
+          if (info.exists) btn.style.borderColor = 'var(--accent)';
+          btn.addEventListener('click', function () {
+            if (bridge() && editingSkinId) PB.pickFrame(editingSkinId, frame.key);
+          });
+          row.appendChild(nm);
+          row.appendChild(st);
+          row.appendChild(toggle);
+          row.appendChild(btn);
+          if (info.exists) {
+            var del = document.createElement('button');
+            del.type = 'button';
+            del.className = 'frame-delete-btn';
+            del.textContent = T('Удалить');
+            del.addEventListener('click', function () {
+              if (!bridge() || !editingSkinId) return;
+              window.GUPetUI.confirm(
+                'Удалить кадр ' + frame.key + '.png?',
+                'Кадр будет удалён из настроек для ПК.',
+                T('Удалить'),
+                function () { PB.deleteFrame(editingSkinId, frame.key); }
+              );
+            });
+            row.appendChild(del);
+          }
+          box.appendChild(row);
+        });
+      }
+      function normalizePcAppEntry(entry) {
+        if (typeof entry === 'string') {
+          var text = entry.trim();
+          if (!text) return null;
+          return { id: text.toLowerCase(), label: text };
+        }
+        if (!entry || typeof entry !== 'object') return null;
+        var id = String(entry.id || entry.label || '').trim().toLowerCase();
+        var label = String(entry.label || entry.id || '').trim();
+        if (!id || !label) return null;
+        return { id: id, label: label };
+      }
+      function mergePcScannedApps(list) {
+        var map = {};
+        pcScannedApps.forEach(function (entry) {
+          var app = normalizePcAppEntry(entry);
+          if (app) map[app.id] = app;
+        });
+        if (pcDraft) {
+          pcDraft.hideApps.forEach(function (id) {
+            if (!map[id]) map[id] = { id: id, label: id };
+          });
+        }
+        (Array.isArray(list) ? list : []).forEach(function (entry) {
+          var app = normalizePcAppEntry(entry);
+          if (app) map[app.id] = app;
+        });
+        pcScannedApps = Object.keys(map).map(function (id) { return map[id]; }).sort(function (a, b) {
+          return a.label.localeCompare(b.label, undefined, { sensitivity: 'base' });
+        });
+      }
+      function renderPcSelectedApps() {
+        var box = $('pcHideAppsList');
+        if (!box || !pcDraft) return;
+        box.innerHTML = '';
+        if (!pcDraft.hideApps.length) {
+          var empty = document.createElement('div');
+          empty.className = 'pc-hint';
+          empty.textContent = 'Ничего не выбрано.';
+          box.appendChild(empty);
+          return;
+        }
+        pcDraft.hideApps.forEach(function (appId) {
+          var found = pcScannedApps.filter(function (entry) { return entry.id === appId; })[0];
+          var chip = document.createElement('span');
+          chip.className = 'pc-app-chip';
+          var label = document.createElement('span');
+          label.textContent = found ? found.label : appId;
+          var del = document.createElement('button');
+          del.type = 'button';
+          del.setAttribute('aria-label', 'Удалить ' + label.textContent);
+          del.textContent = '×';
+          del.addEventListener('click', function () {
+            pcDraft.hideApps = pcDraft.hideApps.filter(function (item) { return item !== appId; });
+            pcDirty = true;
+            savePcNow();
+            renderPcApps();
+          });
+          chip.appendChild(label);
+          chip.appendChild(del);
+          box.appendChild(chip);
+        });
+      }
+      function renderPcScannedApps() {
+        var box = $('pcScannedAppsList');
+        var status = $('pcScanAppsStatus');
+        if (!box || !pcDraft) return;
+        box.innerHTML = '';
+        if (status) {
+          status.textContent = pcScannedApps.length
+            ? ('В списке: ' + pcScannedApps.length)
+            : 'Список ещё не обновлён';
+        }
+        if (!pcScannedApps.length) {
+          var empty = document.createElement('div');
+          empty.className = 'pc-hint';
+          empty.textContent = 'Нажмите «Обновить список», чтобы найти открытые приложения.';
+          box.appendChild(empty);
+          return;
+        }
+        pcScannedApps.forEach(function (entry) {
+          var row = document.createElement('label');
+          row.className = 'pc-app-check';
+          var check = document.createElement('input');
+          check.type = 'checkbox';
+          check.checked = pcDraft.hideApps.indexOf(entry.id) >= 0;
+          check.addEventListener('change', function () {
+            if (check.checked) {
+              if (pcDraft.hideApps.indexOf(entry.id) < 0) pcDraft.hideApps.push(entry.id);
+            } else {
+              pcDraft.hideApps = pcDraft.hideApps.filter(function (item) { return item !== entry.id; });
+            }
+            pcDirty = true;
+            savePcNow();
+            renderPcApps();
+          });
+          var label = document.createElement('span');
+          label.textContent = entry.label;
+          row.appendChild(check);
+          row.appendChild(label);
+          box.appendChild(row);
+        });
+      }
+      function renderPcApps() {
+        if (!pcDraft) return;
+        mergePcScannedApps([]);
+        renderPcSelectedApps();
+        renderPcScannedApps();
+        updatePcVisibility();
+      }
+      function updatePcVisibility() {
+        if (!pcDraft) return;
+        var distanceRow = $('pcDistanceRow');
+        if (distanceRow) distanceRow.classList.toggle('pc-hidden', pcDraft.cursorDetection !== 'distance');
+        var hideSettings = $('pcHideSettings');
+        if (hideSettings) hideSettings.classList.toggle('pc-hidden', !pcDraft.hideOnAppOpen);
+        var selectedBox = $('pcHideSelectedBox');
+        if (selectedBox) selectedBox.classList.toggle('pc-hidden', !pcDraft.hideOnAppOpen || pcDraft.hideMode !== 'selected');
+        requestAnimationFrame(function () {
+          document.querySelectorAll('#skinPcSettingsOverlay .segmented').forEach(function (seg) {
+            if (!seg.offsetParent) return;
+            var active = seg.querySelector('button.active');
+            if (active) moveThumb(seg, active);
+          });
+        });
+      }
+      function renderPcSettings() {
+        if (!pcDraft) pcDraft = defaultPcSettings();
+        document.querySelectorAll('#skinPcSettingsOverlay .segmented[data-pc-field]').forEach(function (seg) {
+          var field = seg.dataset.pcField;
+          setSegValue(seg, String(pcDraft[field]));
+        });
+        var distance = $('pcCursorDistance');
+        if (distance) distance.value = String(pcDraft.cursorDistance);
+        var distanceVal = $('pcCursorDistanceVal');
+        if (distanceVal) distanceVal.textContent = String(pcDraft.cursorDistance);
+        var speed = $('pcCursorSpeed');
+        if (speed) speed.value = String(pcDraft.cursorSpeed);
+        var speedVal = $('pcCursorSpeedVal');
+        if (speedVal) speedVal.textContent = String(pcDraft.cursorSpeed);
+        mergePcScannedApps([]);
+        updatePcVisibility();
+        renderPcFramesList();
+        renderPcApps();
+      }
+      async function scanPcApps() {
+        if (!pcDraft) return;
+        var btn = $('pcScanAppsBtn');
+        var status = $('pcScanAppsStatus');
+        if (btn) btn.disabled = true;
+        if (status) status.textContent = 'Сканирование…';
+        try {
+          var list = [];
+          if (PB.listOpenApps) list = await PB.listOpenApps();
+          pcScannedApps = [];
+          mergePcScannedApps(list);
+          renderPcApps();
+          if (status) {
+            status.textContent = pcScannedApps.length
+              ? ('Найдено: ' + pcScannedApps.length)
+              : 'Открытые приложения не найдены';
+          }
+        } catch (err) {
+          if (status) status.textContent = 'Не удалось получить список приложений';
+        } finally {
+          if (btn) btn.disabled = false;
+        }
+      }
+      function openPcSettings() {
+        if (!bridge() || !editingSkinId || editingSkinId === 'builtin' || !pcDraft) return;
+        renderPcSettings();
+        $('skinPcSettingsOverlay').classList.add('active');
+        requestAnimationFrame(function () {
+          document.querySelectorAll('#skinPcSettingsOverlay .segmented').forEach(function (seg) {
+            var active = seg.querySelector('button.active');
+            if (active) moveThumb(seg, active);
+          });
+        });
+      }
+      function closePcSettings() {
+        savePcNow();
+        $('skinPcSettingsOverlay').classList.remove('active');
+      }
+      function savePcNow() {
+        if (!bridge() || !editingSkinId || editingSkinId === 'builtin' || !pcDraft || !pcDirty) return;
+        if (pcSaveTimer) { clearTimeout(pcSaveTimer); pcSaveTimer = null; }
+        pcDirty = false;
+        PB.setPcSettings(editingSkinId, JSON.stringify(pcDraft));
+      }
+      function schedulePcSave() {
+        if (!bridge() || !editingSkinId || editingSkinId === 'builtin' || !pcDraft) return;
+        if (pcSaveTimer) clearTimeout(pcSaveTimer);
+        pcSaveTimer = setTimeout(function () {
+          pcSaveTimer = null;
+          savePcNow();
+        }, 450);
+      }
+
       /* ---------- segmented ---------- */
       function moveThumb(seg, btn) {
         var thumb = seg.querySelector('.thumb');
@@ -3213,11 +4166,14 @@
             btn.classList.add('active');
             moveThumb(seg, btn);
             var v = btn.dataset.value || btn.textContent.trim();
+            if (seg.dataset.pcField) {
+              setPcField(seg.dataset.pcField, v);
+              return;
+            }
             if (seg.dataset.petField) {
               var target = draftTarget(seg);
               target[seg.dataset.petField] = castPetValue(seg.dataset.petField, v);
               persistTarget(target);
-              scheduleSkinSave();
               return;
             }
             var key = seg.dataset.prefKey || seg.id;
@@ -3241,11 +4197,14 @@
         inp.addEventListener('input', function() {
           var v = document.getElementById(inp.id + 'Val');
           if (v) v.textContent = inp.value;
+          if (inp.dataset.pcField) {
+            setPcField(inp.dataset.pcField, inp.value);
+            return;
+          }
           if (inp.dataset.petField) {
             var target = draftTarget(inp);
             target[inp.dataset.petField] = castPetValue(inp.dataset.petField, inp.value);
             persistTarget(target);
-            scheduleSkinSave();
             return;
           }
           if (bridge()) AB.setString(inp.id, inp.value);
@@ -3272,7 +4231,7 @@
       });
 
       /* ---------- theme / accent ---------- */
-      var OVERLAY_IDS = ['settingsOverlay', 'colorPickerOverlay', 'appConfirmOverlay', 'appAlertOverlay', 'phrasesEditorOverlay', 'skinEditorOverlay', 'skinCreateOverlay'];
+      var OVERLAY_IDS = ['settingsOverlay', 'colorPickerOverlay', 'appConfirmOverlay', 'appAlertOverlay', 'phrasesEditorOverlay', 'skinEditorOverlay', 'skinPcSettingsOverlay', 'skinCreateOverlay', 'skinMarketOverlay'];
       function applyTheme(theme) {
         document.body.classList.toggle('light', theme === 'light');
         OVERLAY_IDS.forEach(function(id) {
@@ -3297,7 +4256,7 @@
       function applyAccent(hex8) {
         var hex = normalizeCssHex(hex8);
         document.documentElement.style.setProperty('--set-accent', hex);
-        ['settingsOverlay', 'colorPickerOverlay', 'appConfirmOverlay', 'appAlertOverlay', 'phrasesEditorOverlay', 'skinEditorOverlay', 'skinCreateOverlay'].forEach(function(id) {
+        ['settingsOverlay', 'colorPickerOverlay', 'appConfirmOverlay', 'appAlertOverlay', 'phrasesEditorOverlay', 'skinEditorOverlay', 'skinPcSettingsOverlay', 'skinCreateOverlay', 'skinMarketOverlay'].forEach(function(id) {
           var o = $(id);
           if (o) o.style.setProperty('--set-accent', hex);
         });
@@ -3599,6 +4558,245 @@
         loadSkins();
       };
       window.onSkinImported = function(name, ok) { if (ok) { loadSkins(); renderGallery(); } };
+      /* ---------- skin market (GitHub Releases) ---------- */
+      var marketItems = [];
+      var marketLoading = false;
+      var marketLoaded = false;
+      var marketDownloading = {};
+      var marketDeleting = {};
+      function marketStatus(text, isError) {
+        var el = $('skinsMarketStatus');
+        if (!el) return;
+        el.textContent = text || '';
+        el.classList.toggle('error', !!isError);
+      }
+      function marketCyrillic(text) {
+        return /[\u0400-\u04FF]/.test(String(text || ''));
+      }
+      /* Названия и описания в релизах часто записаны как «English / Русский».
+         Выбираем часть по языку интерфейса, а не по позиции: данные могут быть
+         записаны в любом порядке. Если перевода нет — показываем как есть. */
+      function marketLocalized(text) {
+        var raw = String(text == null ? '' : text).trim();
+        if (!raw || !/\s\/\s/.test(raw)) return raw;
+        var parts = raw.split(/\s+\/\s+/).filter(function(part) {
+          return !!String(part || '').trim();
+        });
+        if (parts.length < 2) return raw;
+        var i;
+        if (currentLang === 'en') {
+          for (i = 0; i < parts.length; i++) {
+            if (/[A-Za-z]/.test(parts[i]) && !marketCyrillic(parts[i])) return parts[i].trim();
+          }
+          return parts[parts.length - 1].trim();
+        }
+        for (i = 0; i < parts.length; i++) {
+          if (marketCyrillic(parts[i])) return parts[i].trim();
+        }
+        return parts[0].trim();
+      }
+      function marketOwnedIds() {
+        var owned = {};
+        if (!bridge()) return owned;
+        try {
+          var list = JSON.parse(PB.listSkins()) || [];
+          list.forEach(function(skin) { if (skin && skin.id) owned[skin.id] = true; });
+        } catch (e) {}
+        return owned;
+      }
+      function marketErrorText(err) {
+        if (typeof err === 'string') return err;
+        if (err && typeof err.message === 'string') return err.message;
+        return String(err);
+      }
+      function renderSkinMarket() {
+        var grid = $('skinsMarketGrid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        if (!marketItems.length) {
+          if (marketLoaded && !marketLoading) marketStatus(T('В магазине пока нет скинов'));
+          return;
+        }
+        var owned = marketOwnedIds();
+        marketItems.forEach(function(item) {
+          var displayName = marketLocalized(item.name) || 'GUPet Skin';
+          var displayAuthor = marketLocalized(item.author);
+          var displayDescription = marketLocalized(item.description);
+          var installed = !!item.installed || !!(item.local_id && owned[item.local_id]);
+          var card = document.createElement('div');
+          card.className = 'market-card';
+          card.dataset.marketId = item.id;
+
+          var preview = document.createElement('div');
+          preview.className = 'market-preview';
+          if (item.preview) {
+            var img = document.createElement('img');
+            img.className = 'market-preview-img';
+            img.src = item.preview;
+            img.alt = displayName;
+            img.draggable = false;
+            preview.appendChild(img);
+          } else {
+            preview.innerHTML = '<svg class="market-preview-empty" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8.5v9a2 2 0 0 1-1 1.73l-7 4a2 2 0 0 1-2 0l-7-4A2 2 0 0 1 3 17.5v-9a2 2 0 0 1 1-1.73l7-4a2 2 0 0 1 2 0l7 4A2 2 0 0 1 21 8.5Z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path></svg>';
+          }
+
+          var nm = document.createElement('div');
+          nm.className = 'market-name';
+          nm.textContent = displayName;
+          nm.title = displayName;
+
+          var meta = document.createElement('div');
+          meta.className = 'market-meta';
+          var metaParts = [];
+          if (displayAuthor) metaParts.push(displayAuthor);
+          if (item.version) metaParts.push(item.version);
+          meta.textContent = metaParts.join(' · ');
+          meta.title = meta.textContent;
+
+          var desc = document.createElement('div');
+          desc.className = 'market-desc';
+          desc.textContent = displayDescription || '';
+          desc.title = displayDescription || '';
+
+          var actions = document.createElement('div');
+          actions.className = 'market-actions';
+
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'market-download-btn';
+          if (marketDeleting[item.id]) {
+            btn.textContent = T('Удаление…');
+            btn.disabled = true;
+          } else if (marketDownloading[item.id]) {
+            btn.textContent = T('Скачивание…');
+            btn.disabled = true;
+          } else if (installed) {
+            btn.textContent = T('Удалить');
+            btn.classList.add('delete');
+            btn.addEventListener('click', function() { deleteMarketSkin(item); });
+          } else {
+            btn.textContent = T('Скачать');
+            btn.addEventListener('click', function() { downloadMarketSkin(item); });
+          }
+          actions.appendChild(btn);
+
+          if (item.release_url) {
+            var link = document.createElement('a');
+            link.className = 'market-github-btn';
+            link.href = item.release_url;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.title = 'GitHub';
+            link.setAttribute('aria-label', 'GitHub');
+            link.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 .5C5.73.5.75 5.48.75 11.75c0 4.98 3.23 9.2 7.72 10.69.56.1.77-.24.77-.54v-1.9c-3.14.68-3.8-1.51-3.8-1.51-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 .1 1.57-.72 1.57-.72.82-1.4 2.15-1 2.67-.76.08-.6.31-1 1.15-1.23-2.51-.29-5.15-1.25-5.15-5.57 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.43.11-2.98 0 0 .94-.3 3.08 1.15a10.7 10.7 0 0 1 5.6 0c2.14-1.45 3.08-1.15 3.08-1.15.61 1.55.23 2.7.11 2.98.72.79 1.16 1.79 1.16 3.02 0 4.33-2.65 5.28-5.17 5.56.32.28.6.82.6 1.66v2.47c0 .3.2.65.78.54 4.49-1.5 7.72-5.71 7.72-10.69C23.25 5.48 18.27.5 12 .5Z"/></svg>';
+            actions.appendChild(link);
+          }
+
+          card.appendChild(preview);
+          card.appendChild(nm);
+          card.appendChild(meta);
+          card.appendChild(desc);
+          card.appendChild(actions);
+          grid.appendChild(card);
+        });
+      }
+      function downloadMarketSkin(item) {
+        var api = window.GUPetBridge;
+        if (!api || !api.downloadRemoteSkin) {
+          marketStatus(T('Не удалось скачать скин'), true);
+          return;
+        }
+        var displayName = marketLocalized(item.name) || 'GUPet Skin';
+        marketDownloading[item.id] = true;
+        renderSkinMarket();
+        marketStatus('«' + displayName + '» — ' + T('Скачивание…'));
+        var filename = (item.local_id || displayName || 'skin').replace(/[\\/:*?"<>|]+/g, '_') + '.gupet';
+        api.downloadRemoteSkin(item.download_url, filename).then(function(info) {
+          marketDownloading[item.id] = false;
+          item.installed = true;
+          if (info && info.id) item.local_id = info.id;
+          renderSkinMarket();
+          marketStatus('«' + ((info && info.name) || displayName) + '» — ' + T('Скин добавлен в галерею'));
+          loadSkins();
+          renderGallery();
+        }).catch(function(err) {
+          marketDownloading[item.id] = false;
+          renderSkinMarket();
+          marketStatus(T('Не удалось скачать скин'), true);
+          window.GUPetUI.alert('Магазин скинов', marketErrorText(err));
+        });
+      }
+      function deleteMarketSkin(item) {
+        var api = window.GUPetBridge;
+        if (!api || !api.deleteLocalSkin || !item.local_id) {
+          marketStatus(T('Не удалось удалить скин'), true);
+          return;
+        }
+        var doDelete = function() {
+          marketDeleting[item.id] = true;
+          renderSkinMarket();
+          marketStatus('');
+          api.deleteLocalSkin(item.local_id).then(function() {
+            marketDeleting[item.id] = false;
+            item.installed = false;
+            renderSkinMarket();
+            marketStatus(T('Скин удалён'));
+            loadSkins();
+            renderGallery();
+          }).catch(function(err) {
+            marketDeleting[item.id] = false;
+            renderSkinMarket();
+            marketStatus(T('Не удалось удалить скин'), true);
+            window.GUPetUI.alert('Магазин скинов', marketErrorText(err));
+          });
+        };
+        var displayName = marketLocalized(item.name) || 'GUPet Skin';
+        if (askDeleteSkinEnabled()) {
+          window.GUPetUI.confirm('Удалить скин?', '«' + displayName + '» будет удалён с устройства.', 'Удалить', doDelete);
+        } else {
+          doDelete();
+        }
+      }
+      function loadSkinMarket(force) {
+        var api = window.GUPetBridge;
+        if (!api || !api.fetchRemoteSkins) {
+          marketStatus(T('Не удалось загрузить магазин'), true);
+          return;
+        }
+        if (marketLoading || (marketLoaded && !force)) return;
+        marketLoading = true;
+        marketStatus(T('Загрузка…'));
+        api.fetchRemoteSkins().then(function(list) {
+          marketItems = Array.isArray(list) ? list : [];
+          marketLoaded = true;
+          marketLoading = false;
+          renderSkinMarket();
+          if (!marketItems.length) {
+            marketStatus(T('В магазине пока нет скинов'));
+          } else {
+            marketStatus('');
+          }
+        }).catch(function(err) {
+          marketLoading = false;
+          marketLoaded = marketItems.length > 0;
+          renderSkinMarket();
+          marketStatus(T('Не удалось загрузить магазин'), true);
+          console.error('skin market load failed', err);
+        });
+      }
+      function openSkinMarket() {
+        $('skinMarketOverlay').classList.add('active');
+        loadSkinMarket(false);
+      }
+      on($('skinsStoreBtn'), 'click', openSkinMarket);
+      on($('closeSkinMarketBtn'), 'click', function() {
+        $('skinMarketOverlay').classList.remove('active');
+      });
+      on($('skinsMarketRefresh'), 'click', function() { loadSkinMarket(true); });
+      window.addEventListener('gupet-state', function() {
+        var overlay = $('skinMarketOverlay');
+        if (overlay && overlay.classList.contains('active')) renderSkinMarket();
+      });
       window.onSkinExported = function(ok) {
         window.GUPetUI.alert('Экспорт скина', ok ? 'Сохранено' : 'Не удалось сохранить');
       };
@@ -3618,18 +4816,26 @@
       on($('skinCreateCancelBtn'), 'click', function() {
         $('skinCreateOverlay').classList.remove('active');
       });
-      on($('skinCreateSubmitBtn'), 'click', function() {
+      on($('skinCreateSubmitBtn'), 'click', async function() {
         if (!bridge()) return;
         var name = $('skinCreateNameInput').value.trim();
         var author = $('skinCreateAuthorInput').value.trim();
         if (!name) { $('skinCreateNameInput').focus(); return; }
         var res = { ok: false };
-        try { res = JSON.parse(PB.createSkin(name, author)); } catch (e) {}
+        try {
+          if (window.GUPetBridge && window.GUPetBridge.createSkin) {
+            res = await window.GUPetBridge.createSkin(name, author);
+          } else if (PB.createSkin) {
+            res = JSON.parse(PB.createSkin(name, author));
+          }
+        } catch (err) {
+          res = { ok: false, error: String(err) };
+        }
         $('skinCreateOverlay').classList.remove('active');
         renderGallery();
         loadSkins();
-        if (res.ok) openSkinEditor(res.id);
-        else window.GUPetUI.alert('Скин', 'Не удалось создать');
+        if (res && res.ok) openSkinEditor(res.id);
+        else window.GUPetUI.alert('Скин', (res && res.error) || 'Не удалось создать');
       });
       on($('uploadSkinBtn'), 'click', function() { if (bridge()) PB.importSkin(); });
       /* ---------- skin editor ---------- */
@@ -3639,16 +4845,30 @@
         var info = { id: id, name: '', author: '', builtin: false, hasFrames: false };
         try { info = Object.assign(info, JSON.parse(PB.getSkin(id))); } catch (e) {}
         editingSkinId = id;
+        skinMetaDirty = false;
+        skinFileDirty = false;
         $('skinEditorTitle').textContent = 'Редактор скина';
         $('skinEditName').value = info.builtin ? '' : info.name;
         $('skinEditAuthor').value = info.builtin ? '' : (info.author || '');
         // Черновик настроек скина: база — текущие prefs, поверх — файл скина.
         skinDraft = null;
+        pcDraft = null;
+        pcScannedApps = [];
+        pcDirty = false;
+        if (pcSaveTimer) { clearTimeout(pcSaveTimer); pcSaveTimer = null; }
         if (!info.builtin) {
           try {
             skinDraft = Object.assign({}, petSettings, JSON.parse(PB.getSkinSettings(id)) || {});
           } catch (e) { skinDraft = Object.assign({}, petSettings); }
+          try {
+            var pcSource = PB.getPcSettings ? JSON.parse(PB.getPcSettings(id)) : (info.pcSettings || null);
+            pcDraft = normalizePcSettings(pcSource);
+          } catch (e2) {
+            pcDraft = normalizePcSettings(info.pcSettings || null);
+          }
         }
+        $('openSkinPcSettingsBtn').style.display = info.builtin ? 'none' : '';
+        $('skinPcSettingsOverlay').classList.remove('active');
         $('skinEditorOverlay').classList.add('active');
         refreshSkinEditorFields();
         renderFramesList();
@@ -3740,11 +4960,25 @@
       });
       window.onFrameUploaded = function(skinId, frame, ok) {
         if (!ok) { window.GUPetUI.alert('Кадры', 'Не удалось загрузить кадр'); return; }
-        if (skinId && skinId === editingSkinId) renderFramesList();
+        if (skinId && skinId === editingSkinId) {
+          reloadPcDraft();
+          renderFramesList();
+          if (PC_FRAMES.some(function (item) { return item.key === frame; })) {
+            renderPcSettings();
+          } else {
+            renderPcFramesList();
+          }
+        }
         renderGallery();
         loadSkins();
       };
-      window.onFrameDeleted = function() { renderFramesList(); renderGallery(); loadSkins(); };
+      window.onFrameDeleted = function() {
+        syncPcExtraFrames();
+        renderFramesList();
+        renderPcFramesList();
+        renderGallery();
+        loadSkins();
+      };
       function setSegValue(seg, v) {
         if (!seg) return;
         seg.querySelectorAll('button').forEach(function(b) {
@@ -3754,40 +4988,59 @@
         });
       }
       on($('closeSkinEditorBtn'), 'click', function() {
+        savePcNow();
         saveSkinNow(); // финальный flush перед закрытием
+        $('skinPcSettingsOverlay').classList.remove('active');
         $('skinEditorOverlay').classList.remove('active');
         editingSkinId = null;
         skinDraft = null;
+        pcDraft = null;
       });
+      on($('openSkinPcSettingsBtn'), 'click', openPcSettings);
+      on($('closeSkinPcSettingsXBtn'), 'click', closePcSettings);
+      on($('pcScanAppsBtn'), 'click', function() { scanPcApps(); });
       on($('mainCallPoopBtn'), 'click', function() { if (bridge()) PB.callPoop(); });
       on($('mainCleanPoopsBtn'), 'click', function() { if (bridge()) PB.cleanPoops(); });
       on($('openSkinPhrasesBtn'), 'click', function() {
         openPhrasesEditor();
         $('phrasesEditorOverlay').style.zIndex = '2050';
       });
-      /* Автосохранение скина (debounce 300мс): мета + файл настроек скина. */
+      /* Автосохранение скина. Мета и файл настроек пишутся раздельно, чтобы
+         каждое движение ползунка не переписывало manifest.json и галерею. */
       var skinSaveTimer = null;
       var skinFileSaveTimer = null;
-      function saveSkinNow() {
+      var skinMetaDirty = false;
+      var skinFileDirty = false;
+      function saveSkinNow(refreshGallery) {
         if (!bridge() || !editingSkinId || editingSkinId === 'builtin') return;
         if (skinSaveTimer) { clearTimeout(skinSaveTimer); skinSaveTimer = null; }
-        PB.saveSkinMeta(editingSkinId, $('skinEditName').value, $('skinEditAuthor').value);
-        saveSkinFileNow();
-        renderGallery();
-        loadSkins();
+        savePcNow();
+        if (skinMetaDirty) {
+          PB.saveSkinMeta(editingSkinId, $('skinEditName').value, $('skinEditAuthor').value);
+          skinMetaDirty = false;
+        }
+        if (skinFileDirty) saveSkinFileNow();
+        if (refreshGallery) {
+          renderGallery();
+          loadSkins();
+        }
       }
       function saveSkinFileNow() {
         if (!bridge() || !editingSkinId || editingSkinId === 'builtin' || !skinDraft) return;
         if (skinFileSaveTimer) { clearTimeout(skinFileSaveTimer); skinFileSaveTimer = null; }
+        if (!skinFileDirty) return;
+        skinFileDirty = false;
         PB.setSkinSettings(editingSkinId, JSON.stringify(skinDraft));
       }
       function scheduleSkinSave() {
         if (!bridge() || !editingSkinId || editingSkinId === 'builtin') return;
+        skinMetaDirty = true;
         if (skinSaveTimer) clearTimeout(skinSaveTimer);
-        skinSaveTimer = setTimeout(function() { skinSaveTimer = null; saveSkinNow(); }, 300);
+        skinSaveTimer = setTimeout(function() { skinSaveTimer = null; saveSkinNow(false); }, 400);
       }
       function scheduleSkinFileSave() {
         if (!bridge() || !editingSkinId || editingSkinId === 'builtin' || !skinDraft) return;
+        skinFileDirty = true;
         if (skinFileSaveTimer) clearTimeout(skinFileSaveTimer);
         skinFileSaveTimer = setTimeout(function() { skinFileSaveTimer = null; saveSkinFileNow(); }, 300);
       }
@@ -3894,7 +5147,6 @@
           var ctarget = (cp.inEditor && skinDraft) ? skinDraft : petSettings;
           ctarget[cp.field] = hex;
           persistTarget(ctarget);
-          scheduleSkinSave();
           var wrap = document.querySelector(
             (cp.inEditor ? '#skinEditorOverlay ' : '') +
             '.color-input-wrapper[data-pet-field="' + cp.field + '"]');
@@ -4174,7 +5426,7 @@
       });
 
       /* ---------- init ---------- */
-      (function init() {
+      window.GUPET_BRIDGE_READY.then(function() {
         if (!bridge()) return;
         try {
           var sbPx = AB.getStatusBarHeightPx ? AB.getStatusBarHeightPx() : 0;
@@ -4201,7 +5453,9 @@
         loadSkins();
         renderGallery();
         applyLanguage(resolveLang());
-      })();
+      }).catch(function(err) {
+        console.error('GUPet init failed', err);
+      });
     })();
   </script>
 </body>

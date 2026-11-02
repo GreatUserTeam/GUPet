@@ -19,8 +19,15 @@ Thumbs.db
 *.zip
 *.tar.xz
 *.log
+*.deb
+*.rpm
+*.AppImage
+*.exe
+*.idsig
+signing-credentials.txt
 linux_BACKUP_*/
 output_skins/
 windows/СОБРАНО/
 Вставленное изображение.png
 package_error.log
+

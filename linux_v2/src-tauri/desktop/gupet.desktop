@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name={{name}}
+GenericName=Desktop Pet
+Comment={{comment}}
+Exec={{exec}}
+Icon={{icon}}
+Terminal=false
+Categories={{categories}}Amusement;
+Keywords=gupet;pet;desktop;tamagotchi;питомец;
+StartupNotify=false
+StartupWMClass={{exec}}
+X-GNOME-UsesNotifications=true
